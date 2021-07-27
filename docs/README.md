@@ -1,6 +1,6 @@
 # LT SDK
 
-?> Imagine... Creating Amazing Anythings！
+> -   Imagine... Creating Amazing Anythings！
 
 ## Low Development Cost
 
