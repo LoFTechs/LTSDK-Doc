@@ -102,7 +102,7 @@ LTSDK.init(options).subscribe(new Observer<Boolean>() {
 
 #### The definition of LTSDKOptions parameters
 
-| Parameter  | Definition | Necessity | Detial                      |
+| Parameter  | Definition | Necessity | Detail                      |
 | :--------- | :--------- | :-------- | :-------------------------- |
 | context    | Context    | Requierd  | Android context object      |
 | licenseKey | String     | Requierd  | LT ID                       |
@@ -149,7 +149,7 @@ try {
 
 #### The definition of LTusers parameters
 
-| Parameter   | Definition | Detial                      |
+| Parameter   | Definition | Detail                      |
 | :---------- | :--------- | :-------------------------- |
 | userID      | String     | LT unique user ID           |
 | uuid        | String     | LT unique user authenticate |
@@ -238,7 +238,7 @@ try {
 
 #### LTUserStatus
 
-| Parameter   | Definition | Detial                    |
+| Parameter   | Definition | Detail                    |
 | :---------- | :--------- | :------------------------ |
 | userID      | String     | user's LT unique ID       |
 | email       | String     | user's email              |
@@ -506,14 +506,14 @@ try {
 
 #### Request parameters description
 
-| Parameter   | Definition | Detial                    |
+| Parameter   | Definition | Detail                    |
 | :---------- | :--------- | :------------------------ |
 | key      | String     | FCM API Token       |
 | cleanOld       | boolean     | Clean the tokens of previous devices that login using the same userID             |
 
 #### Response parameters description - **LTResponse**
 
-| Parameter   | Definition | Detial                    |
+| Parameter   | Definition | Detail                    |
 | :---------- | :--------- | :------------------------ |
 | returnCode      | int     | Please refer to [Appendix A. Other Error Code List](#appendix-a-other-error-code-list)       |
 | returnMsg       | String     | result message           |
