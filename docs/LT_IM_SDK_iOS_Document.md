@@ -357,6 +357,21 @@ LTChannelHelper *helper = manager.channelHelper;
 // Call channel functions...
 ```
 
+### Create My File Channel
+
+建立我的檔案聊天室, 此聊天室為固定專屬於用戶自身的聊天室。
+
+```objectivec
+NSString *transID = [[NSUUID UUID] UUIDString];
+
+[helper createMyFileChannelWithTransID:transID completion:^(LTCreateChannelResponse * _Nullable response, LTErrorInfo * _Nullable error) {
+    if (error) {
+        return;
+    }
+}];
+```
+
+
 ### Create Single Channel
 
 一對一聊天室為兩用戶間傳遞訊息的聊天室, 此聊天室為固定專屬於兩用戶之間的聊天室。固定專屬的聊天室，無需再操作刪除或退出的功能，並且一對一聊天室中的成員皆可行使相同權限，無需再設定成員角色在 **LTMemberModel** 中。**LTMemberModel** 是在設定成員相關資訊，在建立聊天室前，必須先組成 **LTMemberModel** 物件，再帶入 `createSingleChannelWithTransID:member:completion:`來建立一對一聊天室，建立成功將會觸發 [Receive Event - Channel](#channel-1) 方法 [`LTIMManagerIncomingCreateChannel:receiver:`](#channel-1)。
@@ -591,6 +606,19 @@ BOOL withMembers = YES; //是否取得 member 資訊
 }];
 ```
 
+-   取得**特定時間點**之後有更動的企業聊天室呼叫方式 : 帶入需查詢時間點的 lastUpdateTime。
+
+```objectivec
+NSString *transID = [[NSUUID UUID] UUIDString];
+long long lastUpdateTime = 1608797454000;
+
+[helper queryCorpChannelListWithTransID:transID lastUpdateTime:lastUpdateTime completion:^(LTQueryChannelsResponse * _Nullable response, LTErrorInfo * _Nullable error) {
+    if (error) {
+        return;
+    }
+}];
+```
+
 #### Channel Read Time
 
 取得聊天室的讀取時間，可利用此讀取時間來計算未讀的數量以及相關未讀功能。
@@ -638,6 +666,20 @@ NSUInteger count = 100;// 一次取的最大 channel 個數，建議為 100
 NSString *transID = [[NSUUID UUID] UUIDString];
 
 [helper queryUnreadChannelsWithTransID:transID completion:^(LTQueryUnreadChannelsResponse * _Nullable response, LTErrorInfo * _Nullable error) {
+    if (error) {
+        return;
+    }
+}];
+```
+
+#### Channel ReadInfo
+取得聊天室成員的已讀時間。呼叫 `queryChannelReadInfoWithTransID:chID:completion:` 來獲取資訊。
+
+```objectivec
+NSString *transID = [[NSUUID UUID] UUIDString];
+NSString *chID = @"xxxxxxxx"; //真實存在的 ChannelID
+
+[helper queryChannelReadInfoWithTransID:transID chID:chID completion:^(LTQueryChannelReadInfoResponse * _Nullable response, LTErrorInfo * _Nullable error) {
     if (error) {
         return;
     }
@@ -1132,13 +1174,71 @@ LTIMManager *manager = [LTSDK getIMManagerWithUserID:userID];
 
 ### Send Forward Messages
 
-!> 缺
+如需將訊息轉發至指定聊天室，請使用`forwardMessageWithTransID: msgIDs:chIDs:completion:`轉發訊息。
+
+```
+NSArray *msgIDs = [[NSArray alloc] initWithObjects: @"msgID", nil];
+NSArray *chIDs = [[NSArray alloc] initWithObjects: @"chID", nil];
+NSString *transID = [[NSUUID UUID] UUIDString];
+
+LTIMManager *manager = [LTSDK getIMManagerWithUserID:userID];
+[manager.messageHelper forwardMessageWithTransID:transID msgIDs:msgIDs chIDs:chIDs completion:^(BOOL success, LTErrorInfo * _Nullable error) {
+    if (error) {
+        return;
+    }
+    // 轉發行為成功
+}];
+```
+
+### Send Create Vote Messages
+發送一則投票訊息至指定聊天室。
+
+```objectivec
+NSString *transID = [[NSUUID UUID] UUIDString];
+NSString *chID = @"xxxxxxxx"; //真實存在的 ChannelID
+NSString *subject = @"new subject";
+
+LTVoteOption *voteOption1 = [[LTVoteOption alloc] init];
+voteOption.msgContent = @"Option1";
+voteOption.msgType = LTMessageTypeVoteText;
+
+LTVoteOption *voteOption2 = [[LTVoteOption alloc] init];
+voteOption.msgContent = @"Option2";
+voteOption.msgType = LTMessageTypeVoteText;
+
+NSTimeInterval timeToStartVote = [[NSDate date] timeIntervalSince1970];
+NSTimeInterval timeToCloseVote = [[NSDate date] timeIntervalSince1970] + 86400 * 7;
+
+LTIMManager *manager = [LTSDK getIMManagerWithUserID:userID];
+
+[manager.messageHelper createVoteWithTransID:transID chID:chID chType:LTChannelTypeGroup subject:subject voteOptions:@[voteOption1, voteOption2] fileSize:0 timeToStartVote:timeToStartVote timeToCloseVote:timeToCloseVote completion:^(LTCreateVoteResponse * _Nullable response, LTErrorInfo * _Nullable error) {
+    
+}];
+
+```
+
+### Send CastVote Messages
+對一則投票訊息進行投票。透過QueryVoteResponse取得LTVoteOption的optionMsgID，帶入投票指定選項。
+
+```objectivec
+NSString *transID = [[NSUUID UUID] UUIDString];
+NSString *chID = @"xxxxxxxx"; //真實存在的 ChannelID
+NSString *optionMsgID = @"xxxxxxxx";//投票選項的 MsgID
+
+LTIMManager *manager = [LTSDK getIMManagerWithUserID:userID];
+
+[manager.messageHelper castVoteWithTransID:transID optionMsgID:optionMsgID completion:^(LTCastVoteResponse * _Nonnull response, LTErrorInfo * _Nonnull error) {
+    
+}];
+
+```
+
 
 ### Get Message
 
 #### Message
 
-取得訊息資訊可呼叫 `queryMessageWithTransID:chID:markTS:afterN:completion:`，利用帶入不同的參數取得不同的訊息資訊。參數 chID 帶入非空值，則表示取得只取得該聊天室的訊息資料，若 chID 為空，則不指定 Channel 取得 user 的訊息。參數 markTS 表示一個時間基準點，afterN 為從 markTS 往後取得的訊息筆數，若為**負數**，則為 markTS 往前取得的訊息筆數。AfterN 建議範圍為 -30 ~ 30。
+取得訊息資訊可呼叫 `queryMessageWithTransID:chID:markTS:afterN:completion:`，利用帶入不同的參數取得不同的訊息資訊。參數 chID 帶入非空值，則表示取得只取得該聊天室的訊息資料，若 chID 為空，則不指定 Channel 取得 user 的訊息。參數 markTS / markMsgID 表示一個基準點，afterN 為從 markTS / markMsgID 往後取得的訊息筆數，若為**負數**，則為 markTS / markMsgID 往前取得的訊息筆數。AfterN 建議範圍為 -30 ~ 30。
 
 ```objectivec
 NSString *transID = [[NSUUID UUID] UUIDString];
@@ -1155,6 +1255,59 @@ NSInteger afterN = 30;
         // 此聊天室到當前時間可能還有訊息可以取得
     } else {
         // 往下撈已經沒有資料了
+    }
+}];
+```
+
+#### Schedule Message
+
+取得預約訊息資訊可呼叫 `queryScheduleMessageWithTransID:chID:markTS:afterN:completion:`，利用帶入不同的參數取得不同的訊息資訊。參數 chID 帶入非空值，則表示取得只取得該聊天室的訊息資料，若 chID 為空，則不指定 Channel 取得 user 的訊息。參數 markTS / markMsgID 表示一個基準點，afterN 為從 markTS / markMsgID 往後取得的訊息筆數，若為**負數**，則為 markTS / markMsgID 往前取得的訊息筆數。AfterN 建議範圍為 -30 ~ 30。
+
+```objectivec
+NSString *transID = [[NSUUID UUID] UUIDString];
+NSString *chID = @"xxxxxxxx"; //真實存在的 ChannelID
+NSString *markMsgID = @"xxxxxxx";
+NSInteger afterN = 30;
+
+[helper queryScheduleMessageWithTransID:transID chID:chID markMsgID:markMsgID afterN:afterN msgCategory:nil completion:^(LTQueryMessageResponse * _Nullable response, LTErrorInfo * _Nullable error) {
+    if (error) {
+        return;
+    }
+    if (response.count == afterN) {
+        markMsgID = response.messages.lastObject.msgID;
+        // 此聊天室到當前時間可能還有訊息可以取得
+    } else {
+        // 往下撈已經沒有資料了
+    }
+}];
+```
+
+#### Voting List
+取得聊天室投票訊息列表。
+
+```objectivec
+NSString *transID = [[NSUUID UUID] UUIDString];
+NSString *chID = @"xxxxxxxx"; //真實存在的 ChannelID
+NSTimeInterval markTS = 1590054366458;
+NSInteger afterN = 30;
+
+[helper queryVotingListWithTransID:transID chID:chID markTS:markTS afterN:afterN completion:^(LTQueryVoteResponse * _Nullable response, LTErrorInfo * _Nullable error) {
+    if (error) {
+        return;    
+    }
+}];
+```
+
+#### Voting OptionList
+取得投票訊息的投票狀態。
+
+```objectivec
+NSString *transID = [[NSUUID UUID] UUIDString];
+NSArray *msgIDs = [[NSArray alloc] initWithObjects: @"msgID", nil];
+
+[helper queryVotingOptionListWithTransID:transID msgIDs:msgIDs completion:^(LTQueryVoteOptionResponse * _Nullable response, LTErrorInfo * _Nullable error) {
+    if (error) {
+        return;    
     }
 }];
 ```
@@ -1229,6 +1382,30 @@ Receive Event :
 
 ```objectivec
 - (void)LTIMManagerIncomingMarkRead:(LTMarkReadResponse * _Nullable)response receiver:(NSString * _Nonnull)receiver {
+
+}
+```
+
+#### markReadNewsWithTransID
+
+設定最新消息已讀請使用 `markReadNewsWithTransID:chID:markTS:completion:` 來送出已讀狀態。已讀的設定方式是將需標示的已讀訊息的 **sendTime** 帶入參數，需注意的是若設定此則訊息已讀時，會同時將此則訊息以前的訊息都是視同已讀狀態。使用情境，當每次進入聊天室時或是正在聊天室中收到即時訊息時可送出當下最後一則訊息的 **sendTime**，視同此訊息以前的訊息都已讀取，不需再針對每一則訊息設定已讀狀態。同時也可從 [Receive Event - Message](#message-2) 方法 [`LTIMManagerIncomingMarkReadNews:receiver:`](#message-2) 收到他人的已讀狀態。
+
+```objectivec
+NSString *transID = [[NSUUID UUID] UUIDString];
+NSString *chID = @"xxxxxxxx"; //真實存在的 ChannelID
+long long markTS = 1608797454000;//存在於此 Channel 的某訊息的 sendTime
+
+[helper markReadNewsWithTransID:transID chID:chID markTS:markTS completion:^(LTMarkReadNewsResponse * _Nullable response, LTErrorInfo * _Nullable error) {
+    if (error) {
+        return;
+    }
+}];
+```
+
+Receive Event :
+
+```objectivec
+- (void)LTIMManagerIncomingMarkReadNews:(LTMarkReadNewsResponse * _Nullable)response receiver:(NSString * _Nonnull)receiver {
 
 }
 ```
@@ -1524,6 +1701,37 @@ NSString *userID = @"userID";
 NSString *brandID = @"yourBrand";
 
 [helper queryUserProfileWithTransID:transID userIDs:@[userID] phoneNumbers:@[phoneNumber] brandID:brandID completion:^(LTQueryUserProfileResponse * _Nullable response, LTErrorInfo * _Nullable error) {
+    if (error) {
+        return;
+    }
+}];
+```
+
+#### Query User ID : 透過電話號碼查詢自己或其他使用者的UserID。
+
+將需要查詢的 phoneNumber (E164) 組成的 Array 以及所在的 brandID，帶入 `queryUserIDWithTransID:phoneNumbers:brandID:completion:`，將會獲得userID 的資訊。
+
+```objectivec
+NSString *transID = [[NSUUID UUID] UUIDString];
+NSString *phoneNumber = @"+886901234567";
+NSString *brandID = @"yourBrand";
+
+[helper queryUserIDWithTransID:transID phoneNumbers:@[phoneNumber] brandID:brandID completion:^(LTQueryUserDataResponse * _Nullable response, LTErrorInfo * _Nullable error) {
+    if (error) {
+        return;
+    }
+}];
+```
+
+#### Query PhoneNumber : 透過UserID查詢電話號碼。
+
+將需要查詢的 userID 組成的 Array 組成的 Array 以及所在的 brandID，帶入 `queryPhoneNumberWithTransID:userIDs:completion:`，將會獲得phoneNumber的資訊。
+
+```objectivec
+NSString *transID = [[NSUUID UUID] UUIDString];
+NSString *userID = @"userID";
+
+[helper queryPhoneNumberWithTransID:transID userIDs:@[userID] completion:^(LTQueryUserDataResponse * _Nullable response, LTErrorInfo * _Nullable error) {
     if (error) {
         return;
     }

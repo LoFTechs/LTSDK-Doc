@@ -217,8 +217,17 @@ Please always keep updating APNS Token. Otherwise, the users may not be able to 
 
 ```objectivec
 - (void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)credentials forType:(NSString *)type {
+
+#ifdef DEBUG
+    BOOL isDebug = YES;
+#else
+    BOOL isDebug = NO;
+#endif
+//swift: let isDebug = _isDebugAssertConfiguration()
+
     NSString *token = [self hexadecimalStringFromData:credentials.token];
-    [LTSDK updateNotificationKeyWithAPNSToken:@"" voipToken:token cleanOld:NO completion:^(LTResponse * _Nonnull response) {
+
+    [LTSDK updateNotificationKeyWithAPNSToken:@"" voipToken:token cleanOld:YES isDebug:isDebug completion:^(LTResponse * _Nonnull response) {
         if (response.returnCode == 0) {
         } else {
         }
@@ -245,6 +254,7 @@ Please always keep updating APNS Token. Otherwise, the users may not be able to 
 -   **apnsToken** _(O, String)_ : Member Device Token
 -   **voipToken** _(M, String)_ : Member Device PushKit Token.
 -   **cleanOld** _(O, boolean)_ : Clean the tokens of previous devices that login using the same userID.
+-   **isDebug** _(O, boolean)_ : Compile into debug mode or release mode, and the server will push notifications to the corresponding environment according to the mode.
 
 ## Callkit
 
@@ -381,8 +391,31 @@ Initiate a call by providing the callee’s date into the `startCallWithUserID:o
 ```objectivec
 //initOptions
 LTCallOptions *options = [LTCallOptions initWithUserIDBuilder:^(LTCallPhoneNumberBuilder *builder) {
-    builder.userID = calleeUserID;
+    builder.userID = @"calleeUserID";
     builder.extInfo = @{@"example1":@"custom message 1",@"example2":@"custom message 2",@"example3":@"custom message 3"};//nullable
+}];
+
+//startCall
+LTCall *call = [[LTSDK getCallCenterManager] startCallWithUserID:userID options:options setDelegate:self];
+if (call) {
+
+    //add call to LTCallKitProxy if you want to use Callkit
+    CXCallUpdate *callkitUpdate = [[CXCallUpdate alloc] init];
+    callkitUpdate.remoteHandle = [[CXHandle alloc] initWithType:CXHandleTypeGeneric value:@"Sample"];
+    callkitUpdate.localizedCallerName = calleeDisplayName;
+    [[LTCallKitProxy sharedInstance] startOutgoingCall:call update:callkitUpdate];
+
+    //show user call view
+}
+```
+### Make a group call
+
+Group call need to be set through the `initWithGroupCallBuilder:` method in `LTCallOptions` and setting the userID array as `groupCallMembers` parameter of the member you want to call. Initiate a group call by providing the callee’s data into the `startCallWithUserID:options:setDelegate:`.  Please refer to [Start an outgoing call using Callkit](#start-an-outgoing-call-using-callkit) to know how to use Callkit.
+
+```objectivec
+//initOptions
+LTCallOptions *options = [LTCallOptions initWithGroupCallBuilder:^(LTGroupCallBuilder * _Nonnull)buider {
+    buider.groupCallMembers = @[@"calleeUserID1", @"calleeUserID2"];
 }];
 
 //startCall
@@ -575,6 +608,17 @@ During a current call, both the caller and callee can be send DTMF by the `sendD
 [call busyCall];
 
 ```
+
+### Reinvite group call
+
+If you want to re-invite a group call member who has left the call, you can use the `reinviteGroupCall` method.
+
+```objectivec
+// re-invite a group call member
+[call reinviteGroupCall];
+
+```
+
 
 ### Call history
 
