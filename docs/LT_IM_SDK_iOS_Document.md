@@ -1,5 +1,7 @@
 # LT IM SDK iOS Document
 
+<sub>Last update time: 2022/01/18</sub>
+
 ---
 ## Overview
 
