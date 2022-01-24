@@ -1,5 +1,7 @@
 # LT Call SDK Android Document
 
+<sub>Last update time: 2022/01/18</sub>
+
 ---
 ## Overview
 
@@ -612,6 +614,64 @@ try {
 }
 ```
 
+### Make a group call
+
+Group call need to be set through the `GroupCallOptionsBuilder:` method in `LTCallOptions` and setting the userID array as `setGroupCallMembers` parameter of the member you want to call. Initiate a group call by providing the callee’s data into the `voiceManager.startCallWithUserID()`.
+
+```java
+//initOptions
+ArrayList<String> members = new ArrayList<>();
+members.add("calleeUserID1");
+members.add("calleeUserID2");
+
+LTCallOptions callOptions = new LTCallOptions.GroupCallOptionsBuilder()
+        .setGroupCallAppChID("chID")
+        .setGroupCallMembers(members)
+        .build();
+
+try {
+    LTCallCenterManager callCenterManager = LTSDK.getInstance().getcallCenterManager();
+
+    LTCall ltCall = callCenterManager.startCallWithUserID(callerUserID, callOptions, new LTCallStateListener() {
+        @Override
+        public void onLTCallStateRegistered(LTCall call) {
+
+        }
+
+        @Override
+        public void onLTCallStateConnected(LTCall call) {
+
+        }
+
+        @Override
+        public void onLTCallStateTerminated(LTCall call, LTCallStatusCode callStatusCode) {
+
+        }
+
+        @Override
+        public void onLTCallStateWarning(LTCall call, LTCallStatusCode callStatusCode) {
+
+        }
+
+        @Override
+        public void onLTCallMediaStateChanged(LTCall call, LTMediaType mediaType) {
+
+        }
+
+        @Override
+        public void onLTCallConnectionDuration(LTCall call, int duration) {
+
+        }
+    });
+
+} catch (ClassNotFoundException e) {
+    Log.d(TAG, "ClassNotFoundException:" + e.getMessage());
+} catch (LTSDKNoInitializationException e) {
+    Log.d(TAG, "LTSDKNoInitializationException:" + e.getMessage());
+}
+```
+
+
 #### LTCallOptions parameters description
 
 | Parameter | Definition | Necessity | Detail |
@@ -857,6 +917,16 @@ ltCall.hangupCall();
 
 // Busy a call
 ltCall.busyCall();
+```
+
+## Reinvite group call
+
+If you want to re-invite a group call member who has left the call, you can use the `reinviteGroupCall` method.
+
+```java
+// re-invite a group call member
+[call reinviteGroupCall];
+
 ```
 
 ### Call history
