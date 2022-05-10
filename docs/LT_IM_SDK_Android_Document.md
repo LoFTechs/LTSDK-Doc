@@ -1,6 +1,7 @@
 # LT IM SDK Android Document
 
----
+## <sub>Last update time: 2022/05/10</sub>
+
 ## Overview
 
 With LT SDK, you can build your own customized application with Call and IM function. This documentary provides a guideline that demonstrates how to build and configure an in-app message and call using LT SDK.
@@ -9,10 +10,7 @@ With LT SDK, you can build your own customized application with Call and IM func
 2. In order to connect to the LT service please read the [Authentication](#authentication).
 3. Support Version:
 
-    Android 5.0 (API level 21) or higher ;</br>
-    Java 8 or higher ;</br>
-    Gradle 5.4.1 or higher ;</br>
-    Support Program language：Java, Kotlin
+    Android 5.0 (API level 21) or higher ;</br> Java 8 or higher ;</br> Gradle 5.4.1 or higher ;</br> Support Program language：Java, Kotlin
 
 ## Try the sample app
 
@@ -62,7 +60,6 @@ In the beginning, you must initialize **LTSDK** instance by passing the **LTSDKO
 
 Note: Before switching users, be sure to call [Clean SDK](#clean-sdk)
 
-
 ```java
 LTSDKOptions options = LTSDKOptions.builder()
                 .context(this)
@@ -109,7 +106,6 @@ LTSDK.init(options).subscribe(new Observer<Boolean>() {
 
 You can get user's information by calling `LTSDK.getInstance().getUsers()` method.
 
-
 ```java
 try {
     LTSDK.getInstance().getUsers().subscribe(new io.reactivex.Observer<LTUsers>() {
@@ -144,14 +140,14 @@ try {
 
 #### The definition of LTusers parameters
 
-| Parameter   | Definition | Detail                      |
-| :---------- | :--------- | :-------------------------- |
-| userID      | String     | LT unique user ID           |
-| uuid        | String     | LT unique user authenticate |
-| phoneNumber | String     | User's phone number          |
+| Parameter   | Definition | Detail                            |
+| :---------- | :--------- | :-------------------------------- |
+| userID      | String     | LT unique user ID                 |
+| uuid        | String     | LT unique user authenticate       |
+| phoneNumber | String     | User's phone number               |
 | semiUID     | String     | Customized unique key to register |
-| deviceID    | String     | LT unique device ID          |
-| accountSrc  | String     | LT account source           |
+| deviceID    | String     | LT unique device ID               |
+| accountSrc  | String     | LT account source                 |
 
 ### Get user status
 
@@ -280,15 +276,15 @@ Firebase Cloud Messaging sends notifications and messages to devices which have 
 
 ### Prerequisites
 
-- A device running Android 4.0 or higher, and Google Play services 15.0.0 or higher.
-- FirebaseMessaging API and Android Studio 1.4 or higher with Gradle.
-
+-   A device running Android 4.0 or higher, and Google Play services 15.0.0 or higher.
+-   FirebaseMessaging API and Android Studio 1.4 or higher with Gradle.
 
 ### Connect your App to Firebase
 
 Adding Firebase to your app involves tasks both in the Firebase console and in your open Android project (for example, you download Firebase config files from the console, then move them into your Android project).
 
 #### Step 1: Create a Firebase project
+
 Before you can add Firebase to your Android app, you need to create a Firebase project to connect to your Android app.
 
 1. In the [Firebase console](https://console.firebase.google.com/u/0/), click Add project, then select or enter a Project name.
@@ -306,20 +302,20 @@ Before you can add Firebase to your Android app, you need to create a Firebase p
 ![Imgur](images/CreateFirebaseProject-3.png)
 
 #### Step 2: Register your app with Firebase
-To use Firebase in your Android app, you need to register your app with your Firebase project. Registering your app is often called "adding" your app to your project.
-![Imgur](images/AddFirebase-1.png)
-![Imgur](images/AddFirebase-2.png)
+
+To use Firebase in your Android app, you need to register your app with your Firebase project. Registering your app is often called "adding" your app to your project. ![Imgur](images/AddFirebase-1.png) ![Imgur](images/AddFirebase-2.png)
 
 #### Step 3: Add a Firebase configuration file
-  - 3.1 Add the Firebase Android configuration file to your app:
-    - 3.1.1 Click Download google-services.json to obtain your Firebase Android config file (google-services.json).
-    - 3.1.2 Move your config file into the module (app-level) directory of your app.
-  
+
+-   3.1 Add the Firebase Android configuration file to your app:
+    -   3.1.1 Click Download google-services.json to obtain your Firebase Android config file (google-services.json).
+    -   3.1.2 Move your config file into the module (app-level) directory of your app.
+
 ![Imgur](images/AddFirebase-3.png)
 
-  - 3.2 To enable Firebase products in your app, add the google-services plugin to your Gradle files.
-    - 3.2.1 In your root-level (project-level) Gradle file (build.gradle), add rules to include the Google Services Gradle plugin. Check that you have Google's Maven repository, as well.
-    - 3.2.2 In your module (app-level) Gradle file (usually app/build.gradle), apply the Google Services Gradle plugin:
+-   3.2 To enable Firebase products in your app, add the google-services plugin to your Gradle files.
+    -   3.2.1 In your root-level (project-level) Gradle file (build.gradle), add rules to include the Google Services Gradle plugin. Check that you have Google's Maven repository, as well.
+    -   3.2.2 In your module (app-level) Gradle file (usually app/build.gradle), apply the Google Services Gradle plugin:
 
 ```java
 buildscript {
@@ -360,7 +356,7 @@ android {
 
 #### Step 4: Add Firebase SDKs to your app
 
-  - 4.1 Using the Firebase Android BoM, declare the dependencies for the Firebase products that you want to use in your app. Declare them in your module (app-level) Gradle file (usually app/build.gradle).
+-   4.1 Using the Firebase Android BoM, declare the dependencies for the Firebase products that you want to use in your app. Declare them in your module (app-level) Gradle file (usually app/build.gradle).
 
 ```java
 dependencies {
@@ -374,8 +370,7 @@ dependencies {
 }
 ```
 
-  - 4.2 Sync your app to ensure that all dependencies have the necessary versions.
-
+-   4.2 Sync your app to ensure that all dependencies have the necessary versions.
 
 ### Generate server key form Firebase
 
@@ -397,7 +392,7 @@ Register your server key to LFSDK server through the [LFSDK console](https://con
 
 Add the following to your app's manifest:
 
-- A service that extends FirebaseMessagingService. This is required if you want to do any message handling beyond receiving notifications on apps in the background. To receive notifications in foregrounded apps, to receive data payload, to send upstream messages, and so on, you must extend this service.
+-   A service that extends FirebaseMessagingService. This is required if you want to do any message handling beyond receiving notifications on apps in the background. To receive notifications in foregrounded apps, to receive data payload, to send upstream messages, and so on, you must extend this service.
 
 ```java
 <service
@@ -501,31 +496,29 @@ try {
 
 #### Request parameters description
 
-| Parameter   | Definition | Detail                    |
-| :---------- | :--------- | :------------------------ |
-| key      | String     | FCM API Token       |
-| cleanOld       | boolean     | Clean the tokens of previous devices that login using the same userID             |
+| Parameter | Definition | Detail |
+| :-- | :-- | :-- |
+| key | String | FCM API Token |
+| cleanOld | boolean | Clean the tokens of previous devices that login using the same userID |
 
 #### Response parameters description - **LTResponse**
 
-| Parameter   | Definition | Detail                    |
-| :---------- | :--------- | :------------------------ |
-| returnCode      | int     | Please refer to [Appendix A. Other Error Code List](#appendix-a-other-error-code-list)       |
-| returnMsg       | String     | result message           |
+| Parameter | Definition | Detail |
+| :-- | :-- | :-- |
+| returnCode | int | Please refer to [Appendix A. Other Error Code List](#appendix-a-other-error-code-list) |
+| returnMsg | String | result message |
 
 ### Handling messages
 
-To receive messages, use a service that extends FirebaseMessagingService. Your service should override the onMessageReceived and onDeletedMessages callbacks. It should handle any message within 20 seconds of receipt (10 seconds on Android Marshmallow). The time window may be shorter depending on OS delays incurred ahead of calling onMessageReceived. After that time, various OS behaviors such as Android O's background execution limits may interfere with your ability to complete your work. For more information see our overview on message priority.
-onMessageReceived is provided for most message types, with the following exceptions:
+To receive messages, use a service that extends FirebaseMessagingService. Your service should override the onMessageReceived and onDeletedMessages callbacks. It should handle any message within 20 seconds of receipt (10 seconds on Android Marshmallow). The time window may be shorter depending on OS delays incurred ahead of calling onMessageReceived. After that time, various OS behaviors such as Android O's background execution limits may interfere with your ability to complete your work. For more information see our overview on message priority. onMessageReceived is provided for most message types, with the following exceptions:
 
-- Notification messages delivered when your app is in the background. In this case, the notification is delivered to the device’s system tray. A user tap on a notification opens the app launcher by default.
-- Messages with both notification and data payload, when received in the background. In this case, the notification is delivered to the device’s system tray, and the data payload is delivered in the extras of the intent of your launcher Activity.
-In summary:
+-   Notification messages delivered when your app is in the background. In this case, the notification is delivered to the device’s system tray. A user tap on a notification opens the app launcher by default.
+-   Messages with both notification and data payload, when received in the background. In this case, the notification is delivered to the device’s system tray, and the data payload is delivered in the extras of the intent of your launcher Activity. In summary:
 
-| App state   | Notification | Data    | Both |
-| :---------- | :--------- | :------------- |:---------------|
-| Foreground  | onMessageReceived  | onMessageReceived |onMessageReceived|
-| Background        | System tray     | onMessageReceived | Notification: system tray Data: in extras of the intent.|
+| App state | Notification | Data | Both |
+| :-- | :-- | :-- | :-- |
+| Foreground | onMessageReceived | onMessageReceived | onMessageReceived |
+| Background | System tray | onMessageReceived | Notification: system tray Data: in extras of the intent. |
 
 ```java
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
@@ -546,11 +539,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 ## Start IM
 
-請使用 `LTSDK.getInstance().getIMManager` 來得到 **LTIMManager** 物件後，可利用 **LTIMManager** 物件來操作連線相關服務。在呼叫 IM API 我們使用 RX 訂閱的方式取的結果，可參閱 [RX](https://github.com/ReactiveX/RxJava) 使用方式。並在每次呼叫 IM 服務時都需帶入**transID**，此**transID**表示此 API 服務的專屬 ID。
+Please use `LTSDK.getInstance().getIMManager` to get **LTIMManager** object, and use **LTIMManager** object to operate connection related services. While using the API, please refer to [RX](https://github.com/ReactiveX/RxJava) to know how to subscribe the response, and bring **transID** on every query. The **transID** is an exclusive ID for this API.
 
 ### Connect
 
-在使用 IM 相關的各式 API 之前，請務必先呼叫 `LTIMManager.connect`。並且可設定 IMReceiver 來收到 IM 的 event，可參考 [Receive Event](#receive-event)。在呼叫 `LTIMManager.connect` 後，可從 **LTCallbackResultListener** 中得到連線的結果。連線成功後即可以開始使用 IM API 的服務。
+Before use all the API, must first query `LTIMManager.connect`, and set IMReceiver to receive IM event (please refer [Receive Event](#receive-event)). After calling `LTIMManager.connect`, you can have the connection from **LTCallbackResultListener**, and start to use the IM API service.
 
 ```java
 try {
@@ -576,7 +569,7 @@ try {
 
 ### Disconnect
 
-若無需再使用 IM 服務，可呼叫 `LTIMManager.disconnect` 來中斷 IM 服務。強烈建議進入背景時呼叫斷線，可以減少不必要的背景操作。
+If IM service is no longer needed, call `LTIMManager.disconnect` to disconnect IM service. Strongly suggest to disconnect in background, so as to reduce unnecessary background operations.
 
 ```java
 try {
@@ -601,7 +594,7 @@ try {
 
 ### Detect Connection
 
-如需偵測連線服務是否正常，可呼叫 `LTIMManager.isConnected`
+Query `LTIMManager.isConnected` to detect connection when necessary.
 
 ```java
 booelan isConnected = imManager.isConnected();
@@ -621,7 +614,9 @@ LTChannelHelper channelHelper = imManager.getChannelHelper();
 
 ### Create Single Channel
 
-一對一聊天室為兩用戶間傳遞訊息的聊天室, 此聊天室為固定專屬於兩用戶之間的聊天室。固定專屬的聊天室，無需再操作刪除或退出的功能，並且一對一聊天室中的成員皆可行使相同權限，無需再設定成員角色在**LTMemberModel**中。**LTMemberModel**是在設定成員相關資訊，在建立聊天室前，必須先組成**LTMemberModel**物件，再帶入`LTIMManager.getChannelHelper().createSingleChannel()`來建立一對一聊天室。
+Single channel is for two users in a chatroom to send messages, it is unique for these two specific users. As being specific, there is no need to delete or kick off, and both members has equal right and privilege, so no role setting for **LTMemberModel** required.
+
+**LTMemberModel** object has been set for member information, it was built before the the channel created, then bring in `LTIMManager.getChannelHelper().createSingleChannel()` for single channel.
 
 ```java
 LTMemberModel memberModel =LTMemberModel.builder()
@@ -658,7 +653,7 @@ imManager.getChannelHelper().createSingleChannel("transID", memberModel)
 
 ### Create Group Channel
 
-Group Channel 為多人聊天室，每次建立的多人聊天室都是唯一的。一但聊天室解散後，此聊天室就不存在。在多人聊天室中的成員可以設定不同的權限。權限可由**LTMemberModel**設定，並帶入到 `LTIMManager.getChannelHelper().createGroupChannel`。除此之外多人聊天室與一對一聊天室的差異，需自定義聊天室的專屬 ID 以及聊天室顯示的名稱。可參考一下的範例。
+Group Channel is a multi members chatroom, every channel is unique. Once the channel is dismissed, the chatroom doesn't exist any more. In group channel, member's privilege can be set in **LTMemberModel**, and bring in `LTIMManager.getChannelHelper().createGroupChannel`. Besides, the difference from single channel is that the chatroom's ID and displayed name can be defined. Examples as:
 
 ```java
 Set<LTMemberModel> memberModelSet = new HashSet<>();
@@ -704,13 +699,13 @@ imManager.getChannelHelper().createGroupChannel("transID", "chID", "First Group 
 
 ### Set Channel
 
-建立完 Channel 之後，可以更改 Channel 相關設定，包含以下：
+After channel is created, channel related setting can be edited, including:
 
 #### Channel Preference
 
-**Channel Preference** 意指 user 本身在聊天室中專屬的設定值，這個設定值只有 user 本身可以取的。每次設定成功後，將會回傳目前所有的在此聊天室的專屬設定值(Channel Preference)。
+**Channel Preference** means user oneself's exclusive setting in this chatroom and the setting value can only be obtained by user oneself. When any setting is successful, such channel preference shall be sent back.
 
-- **Mute** : 設定聊天室靜音，如需關掉聊天室的通知請設定 true，否則請設定成 false。
+-   **Mute**: set the chatroom to be silent. If you want to turn the notification off, set it as true, if not, set it as false.
 
 ```java
 imManager.getChannelHelper().setChannelMute("transID", "chID", true)
@@ -740,7 +735,7 @@ imManager.getChannelHelper().setChannelMute("transID", "chID", true)
     });
 ```
 
-- **RingTone** : 設定聊天室通知鈴聲，可自行設定鈴聲同步方式，如鈴聲的路徑或是對應的資源檔 ID。
+-   **RingTone**: setting for the ringtone of the chatroom, can also change the way the ringtone sync, e.g. the route or the corresponding source ID.
 
 ```java
 imManager.getChannelHelper().setChannelRingTone("transID","chID","ringTonePath")
@@ -770,7 +765,7 @@ imManager.getChannelHelper().setChannelRingTone("transID","chID","ringTonePath")
     });
 ```
 
-- **Nickname** : 設定聊天室專屬暱稱，此暱稱會同步給聊天室成員顯示清單中。
+-   **Nickname**: setting for the chatroom's nickname, this nickname shall be shown in all member's chatroom.
 
 ```java
 imManager.getChannelHelper().setChannelUserNickname("transID","chID","tree")
@@ -802,9 +797,9 @@ imManager.getChannelHelper().setChannelUserNickname("transID","chID","tree")
 
 #### Channel Profile
 
-**Channel Profile** : 意指聊天室本身的設定，所有成員將會取得相同的資訊。若有成員設定成功後，將會收到當次收到的設定值，並可從 [Receiver Event - Channel](#channel-1) 收他其他成員的更改內容。
+**Channel Profile**: means the setting for the chatroom, all members shall received the same info. If some member edited it, he shall receive the setting value and also can receive other member's edits [Receiver Event - Channel](#channel-1) too.
 
-- **Subject** :設定聊天室名稱
+-   **Subject**: setting the chatroom's name
 
 ```java
 imManager.getChannelHelper().setChannelSubject("transID","chID","New Subject")
@@ -834,9 +829,9 @@ imManager.getChannelHelper().setChannelSubject("transID","chID","New Subject")
     });
 ```
 
-- **Avatar** : 聊天室的圖示
+-   **Avatar**: chatroom's avatar/icon
 
-設定聊天室的圖示
+Setting chatroom's avatar
 
 ```java
 Uri imageUri = Uri.parse(Environment.getExternalStorageDirectory() + "/Download/image.jpg");
@@ -867,7 +862,7 @@ imManager.getChannelHelper().setChannelAvatar("transID","chID",imageUri)
     });
 ```
 
-刪除聊天室的圖示
+Delete chatroom's avatar
 
 ```java
 
@@ -900,7 +895,7 @@ imManager.getChannelHelper().deleteChannelAvatar("transID","chID",fileinfo)
     });
 ```
 
-- **CustomAttr** : 設定聊天室的客製化需求，可自訂聊天室屬性，使用 bit 概念彈性擴增聊天室顯示需求。
+-   **CustomAttr**: setting chatroom's customization requirement, can edit the attribute, using bit concept to expand display requirement with flexibility.
 
 ```java
 int chat_highline = 1<<0;
@@ -935,13 +930,13 @@ imManager.getChannelHelper().setChannelCustomAttr("transID","chID", customAttr)
 
 ### Get Channel
 
-此章節將介紹如何主動取的聊天室相關的資訊。
+This chapter shall introduce how to obtain information about a channel.
 
 #### Channel Information
 
-取得聊天室設定資訊可呼叫`LTIMManager.getChannelHelper().queryChannel()`，利用帶入不同的參數取得指定的聊天室資訊。參數中可設定是否優先取的聊天室成員的資訊，若設定成 false，也可從 [Get Member](#get-member) 取得成員資訊。另外聊天室的資料大，所以請務必使用批次的機制來避免一次大量的資料，建議的批次數量為每一批 30 筆。
+Query `LTIMManager.getChannelHelper().queryChannel()` to obtain channel information. Using different parameters to get specific channel information. Parameter can prioritize member's information first, when it's set as false, you can also obtain the info from [Get Member](#get-member). As the dataload is heavy, please do use batch mechanism to avoid heavy loading. Suggest one batch to be 30 data at one batch.
 
-- 取得單一聊天室呼叫方式：
+-   Get a chatroom with specified ID:
 
 ```java
 imManager.getChannelHelper().queryChannel("transID", "chID", true)
@@ -971,7 +966,7 @@ imManager.getChannelHelper().queryChannel("transID", "chID", true)
     });
 ```
 
-- 取得特定形態的聊天室呼叫方式：
+-   Get chatroom with specified type
 
 ```java
 int batchCount = 30;
@@ -1001,7 +996,7 @@ imManager.getChannelHelper().queryChannelList( "transID", Collections.singletonL
 });
 ```
 
-- 取得特定時間點之後有更動的聊天室呼叫方式：
+-   Get changes after specific time:
 
 ```java
 imManager.getChannelHelper().queryChannelList("transID", 1608797454000L, true, 30))
@@ -1033,7 +1028,7 @@ imManager.getChannelHelper().queryChannelList("transID", 1608797454000L, true, 3
 
 #### Channel Read Time
 
-取得所有聊天室的讀取時間，可利用此讀取時間來計算未讀的數量以及相關未讀功能。可是使用`LTIMManager.getChannelHelper(). queryChannelsReadTime()`，搭配**lastChID**以及**count**的參數。**lastChID**可帶入前一次取的最後一間聊天室 ID 來取的下一批次的聊天室讀取時間，若是第一批取得時請帶入`null`表示從第一間聊天室撈取。
+Chatroom reading time can be used to count unread counts and all related unread functions. Can use `LTIMManager.getChannelHelper(). queryChannelsReadTime()` with **lastChID** and **count** parameters. **lastChID** can bring in the chatroom ID from the previous time to get the next batch of chatrooms. If it's the first batch, please use `null` to capture from the first chatroom.
 
 ```java
 imManager.getChannelHelper().queryChannelsReadTime("transID", "lastChID", 100))
@@ -1065,7 +1060,7 @@ imManager.getChannelHelper().queryChannelsReadTime("transID", "lastChID", 100))
 
 #### Unread Channels
 
-一次取得有未讀聊天室的未讀數量與總未讀數。
+Get unread chatroom and all unread counts.
 
 ```java
 imManager.getChannelHelper().queryUnreadChannels("transID"))
@@ -1097,7 +1092,7 @@ imManager.getChannelHelper().queryUnreadChannels("transID"))
 
 ### Delete Channel
 
-當多人聊天室有解散的需求時，並擁有解散聊天室的權限時可呼叫`LTIMManager.getChannelHelper().dismissChannel()`。
+when need to delete a channel, with privilege, query `LTIMManager.getChannelHelper().dismissChannel()`.
 
 ```java
 imManager.getChannelHelper().dismissChannel("transID","chID")
@@ -1139,7 +1134,7 @@ LTChannelHelper channelHelper = imManager.getChannelHelper();
 
 ### Invite Member
 
-若擁有邀請成員的權限，可呼叫`LTIMManager.getChannelHelper().inviteMembers()`來邀請其他成員進入聊天室。其中可使用**LTJoinMethod**設定加入的方式來統計加入方式，若無需使用可帶入`null`。
+If privileged to invite a member, query `LTIMManager.getChannelHelper().inviteMembers()` to invite an outside member to the chatroom. Use **LTJoinMethod** to calculate the invitation, bring `null` if not necessary.
 
 ```java
 LTMemberModel memberModel =LTMemberModel.builder()
@@ -1185,7 +1180,7 @@ imManager.getChannelHelper().inviteMembers("transID","chID", memberModelSet, LTJ
 
 ### Kick Member
 
-若擁有踢人的權限，可呼叫`LTIMManager.getChannelHelper().inviteMembers()`將指定成員踢出聊天室。
+If privileged to kick a member, query `LTIMManager.getChannelHelper().inviteMembers()` to kick a specific member out of the chatroom.
 
 ```java
 Set<LTMemberModel> memberModelSet = new HashSet<>();
@@ -1228,7 +1223,7 @@ imManager.getChannelHelper().kickMembers("transID","chID", memberModelSet)
 
 ### Join
 
-和 Invite 的差異在於 Invite 由他人邀請加入，Join 則可以主動加入聊天室。若此聊天室擁有主動加入的權限，可呼叫`LTIMManager.getChannelHelper().joinChannel()`加入此聊天室。Join 如同 Invite 可帶入**LTJoinMethod**設定的方式來統計並可搭配誰給予的加入資訊**byWho**，若無需要則可帶入`null`。
+The difference with Invite is that invite is the invitee is invited to join by others, and Join can actively join the chatroom. If the chatroom has the privilege to join, query `LTIMManager.getChannelHelper().joinChannel()`. Join, like Invite, can bring the setting by **LTJoinMethod** and **byWho** to count and match the invitee info, bring `null` if not necessary.
 
 ```java
 imManager.getChannelHelper().joinChannel("transID","chID", LTJoinMethod.NORMAL, "byWho")
@@ -1260,7 +1255,7 @@ imManager.getChannelHelper().joinChannel("transID","chID", LTJoinMethod.NORMAL, 
 
 ### Leave
 
-若擁有離開的權限，則可呼叫`LTIMManager.getChannelHelper().leaveChannel()`自行離開聊天室。
+If privileged to leave, query `LTIMManager.getChannelHelper().leaveChannel()` to leave the chatroom.
 
 ```java
 imManager.getChannelHelper().leaveChannel("transID","chID")
@@ -1292,7 +1287,7 @@ imManager.getChannelHelper().leaveChannel("transID","chID")
 
 ### Set Member
 
-若擁有更改成員角色的權限，則可呼叫`LTIMManager.getChannelHelper().setMemberRole()`指定成員的角色。一般最常使用的情境，當管理者要離開聊天室時，需先將指定的成員設定成管理者的身份再呼叫離開聊天室。
+If privileged to edit a member's role, query `LTIMManager.getChannelHelper().setMemberRole()`. Most common scenario is when the group admin leaves the chatroom, he needs to assign a member to be admin before leaving.
 
 ```java
 imManager.getChannelHelper().setMemberRole("transID","chID", "userIDA", LTChannelRole.MODERATOR)
@@ -1326,7 +1321,7 @@ imManager.getChannelHelper().setMemberRole("transID","chID", "userIDA", LTChanne
 
 #### Member Information
 
-在獲取成員清單會根據你的角色權限不同，而有不一樣的結果。例如角色權限越高，能讀取的角色範圍越多。可使用`LTIMManager.getChannelHelper().queryChannelMembersByChID()`來取得單一聊天室清單。這裡建議使用分批撈取的方式，**lastUserID**為上一批最後的 userID，當為第一次撈取時請帶入`null`。
+Based on roles and privileges, get member result could be different. The higher privilege, the more roles can be edited. Use `LTIMManager.getChannelHelper().queryChannelMembersByChID()` to capture member list. Suggest to capture info in batch, **lastUserID** is the previous batch user ID, if it's the first time, use `null`.
 
 ```java
 imManager.getChannelHelper().queryChannelMembersByChID("transID","chID", "lastUserID", 100)
@@ -1358,7 +1353,7 @@ imManager.getChannelHelper().queryChannelMembersByChID("transID","chID", "lastUs
 
 #### Member Read Info
 
-如需取的聊天室其他成員讀取狀態，我們可以利用`LTIMManager.getChannelHelper().queryChannelReadInfo()`來取的單一聊天室的成員已讀時間。可利用此成員的已讀時間來計算已傳送訊息的已讀狀態。
+Get member read info by using `LTIMManager.getChannelHelper().queryChannelReadInfo()` to get the chatroom's member read info. Use the time of read to decide status
 
 ```java
 imManager.getChannelHelper().queryChannelReadInfo("transID","chID")
@@ -1400,13 +1395,13 @@ LTMessageHelper messageHelper = imManager.getMessageHelper();
 
 ### Send Message
 
-次章節主要介紹 LTIMSDK 支援的訊息傳送方式以及訊息種類。
+This chapter introduces LTIMSDK message sending and message types.
 
 #### Messages
 
-以下為 LTIMSDK 可支援的訊息種類，再搭配後面章節的傳送方式 [Send Message](#send-message), [Send Scheduled Messages](#send-scheduled-messages), [Send Broadcast Messages](#send-broadcast-messages)。
+Below is what LTIMSDK supports in messge type，with following chapters of message sending [Send Message](#send-message), [Send Scheduled Messages](#send-scheduled-messages), [Send Broadcast Messages](#send-broadcast-messages).
 
-- Text Message 一般文字訊息。避免訊息傳送資料量過大，請限制字數在 8000 以內。文字訊息同時支援標記(tag)訊息，可以利用標記訊息 指定的聊天室成員。標記成員可使用**LTTagUser**設定標記的成員內容，搭配**LTTagUser**中的**start**與**length**可彈性替換 **msgContent**中顯示標記的方式。
+-   Text Message is for general text messages. To avoid overloading, limit the messages in 8000 characters. Text message supports tag type, use tag to specify specific member. specified member can be marked by using **LTTagUser**, accompanied by **start** and **length** in **LTTagUser** the displayed way replaced in **msgContent**.
 
 ```java
 List<LTTagUser> tagUsers = new ArrayList<>();
@@ -1426,7 +1421,7 @@ LTTextMessage.builder()
 
 ```
 
-- Sticker Message 貼圖訊息。此貼圖訊息可搭配 LT 專屬貼圖也可以替換成自定義貼圖。如用自訂貼圖可使用**msgContent**設定貼圖的取得方式，例如貼圖檔案路徑。
+-   Sticker Message: this sticker message can be LT owned stickers or replaced by self-defined sticker. When using self-defined sticker, use **msgContent** to acquire the sticker, such as the sticker file source.
 
 ```java
 LTStickerMessage stickMessage = LTStickerMessage.builder()
@@ -1437,7 +1432,7 @@ LTStickerMessage stickMessage = LTStickerMessage.builder()
     .build();
 ```
 
-- Image Message 圖片訊息。若使用**LTImageMessage**來傳送圖片訊息，將會傳送圖片訊息到 LT 設定的雲端空間。若想使用指定雲端空間，則可使用**LTCustomMessage**客制傳送的方式。在**LTImageMessage**中可傳送原圖路徑以及縮圖路徑，必須使用手機本地端的檔案。另外提供**extInfo**欄位，可添加附加資訊，例如圖片的寬高，可使用在圖片顯示上。
+-   Image Message: If using **LTImageMessage** to send a message, the message shall be sent to LT designated cloud space. If other designated space is required, use **LTCustomMessage** to customize the sending. In **LTImageMessage**, can send the original image or thumbnail file path by using the client's local files. LT also provides an **extInfo** column for attached info, such as the dimension of the image to be displayed on the image.
 
 ```java
 Uri imageUri = Uri.parse(Environment.getExternalStorageDirectory() + File.separator + "Download/ef05f74a-90f7-4f69-94cb-d588fa435bae.png");
@@ -1458,7 +1453,7 @@ LTImageMessage imageMessage = LTImageMessage.builder()
     .build();
 ```
 
-- Video Message 影像訊息。若使用**LTVideoMessage**來傳送影像訊息，將會傳送影像訊息到 LT 設定的雲端空間。若想使用指定雲端空間，則可使用**LTCustomMessage**客制傳送的方式。在**LTVideoMessage**中可傳送影像路徑以及縮圖路徑，必須使用手機本地端的檔案。另外提供**extInfo**欄位，可添加附加資訊，例如影像的寬高，可使用在圖片顯示上。
+-   Video Message: if using **LTVideoMessage** to send a video message，the message shall be sent to LT designated cloud space. If other designated space is required, use **LTCustomMessage** to customize the sending. In **LTVideoMessage**, can send original video or thumbnail file path by using client's local files. LT also provides an extInfo column for attached info, such as the dimension of the image to be displayed on the image.
 
 ```java
 Uri videoUri = Uri.parse(Environment.getExternalStorageDirectory() + File.separator + "Download/test.mp4");
@@ -1479,7 +1474,7 @@ LTVideoMessage videoMessage = LTVideoMessage.builder()
     .build();
 ```
 
-- Voice Message 語音訊息。若使用**LTVoiceMessage**來傳送語音訊息，將會傳送語音訊息到 LT 設定的雲端空間。若想使用指定雲端空間，則可使用**LTCustomMessage**客制傳送的方式。在**LTVoiceMessage**中可傳送語音路徑，必須使用手機本地端的檔案。另外提供**extInfo**欄位，可添加附加資訊，例如語音長度，可使用在圖片顯示上。
+-   Voice Message: if using **LTVoiceMessage** to send a voice message，the message shall be sent to LT designated cloud space. If other designated space is required, use **LTCustomMessage** to customize the sending. In **LTVoiceMessage**, can send original video or thumbnail file path by using client's local files. LT also provides an extInfo column for attached info, such as the dimension of the image to be displayed on the image.
 
 ```java
 Uri voiceUri = Uri.parse(Environment.getExternalStorageDirectory() + File.separator + "Download/27dc2d02-a0df-47d9-9443-f8678356e25e.aac");
@@ -1497,13 +1492,13 @@ LTVoiceMessage voiceMessage = LTVoiceMessage.builder()
     .build();
 ```
 
-- Location Message 位置訊息。可搭配[Google Map](https://developers.google.com/maps/documentation/android-sdk/map)取的定位資訊，並將資料組出**LTLocation**參數帶入**LTLocationMessage**傳送。
+-   Location Message: together with [Google Map](https://developers.google.com/maps/documentation/android-sdk/map) to get location info, assorted data for **LTLocation** parameter in sending **LTLocationMessage**
 
 ```java
 LTLocation location = LTLocation.builder()
-        .address("300台灣新竹市東區關新路27號號 17 樓 之 1")
-        .latitude(24.784781264526057)
-        .longitude(121.01793609559535)
+        .address("No.5, Shaoxing N. St., Zhongzheng Dist., Taipei City, Taiwan (R.O.C.)")
+        .latitude(25.04492228152394)
+        .longitude(121.52542401563323)
         .build();
 LTLocationMessage locationMessage = LTLocationMessage.builder()
         .transID(transID)
@@ -1513,7 +1508,7 @@ LTLocationMessage locationMessage = LTLocationMessage.builder()
         .build();
 ```
 
-- Contact Message 聯絡人訊息。若使用**LTContactMessage**來傳送聯絡人訊息，將會傳送聯絡人訊息到 LT 設定的雲端空間。若想使用指定雲端空間，則可使用**LTCustomMessage**客制傳送的方式。在**LTContactMessage**中可傳送聯絡人檔案路徑以及縮圖路徑，必須使用手機本地端的檔案。另外提供**extInfo**欄位，可添加附加資訊，例如聯絡人名稱，可使用在圖片顯示上。
+-   Contact Message: if using **LTContactMessage** to send a contact message，the message shall be sent to LT designated cloud space. If other designated space is required, use **LTCustomMessage** to customize the sending. In **LTContactMessage**, can send original contact info or thumbnail file path by using client's local files. LT also provides an extInfo column for attached info, such as the contact displayed name on the image.
 
 ```java
 Uri contactUri = Uri.parse(Environment.getExternalStorageDirectory() + File.separator + "Download/27dc2d02-a0df-47d9-9443-f8678356e25e.vcf");
@@ -1533,7 +1528,7 @@ LTContactMessage.builder()
     .build());
 ```
 
-- Document Message 各類格式檔案訊息。若使用**LTDocumentMessage**來傳送檔案訊息，將會傳送檔案訊息到 LT 設定的雲端空間。若想使用指定雲端空間，則可使用**LTCustomMessage**客制傳送的方式。在**LTDocumentMessage**中可傳送檔案路徑，必須使用手機本地端的檔案。另外提供**extInfo**欄位，可添加附加資訊，例如檔案大小，可使用在圖片顯示上。
+-   Document Message: If using **LTDocumentMessage** to send a document message，the message shall be sent to LT designated cloud space. If other designated space is required, use **LTCustomMessage** to customize the sending. In **LTDocumentMessage**, can send original contact info or thumbnail file path by using client's local files. LT also provides an **extInfo** column for attached info, such as the file size to be displayed on the image.
 
 ```java
 Uri documentUri = Uri.parse(Environment.getExternalStorageDirectory() + File.separator + "Download/27dc2d02-a0df-47d9-9443-f8678356e25e.doc");
@@ -1551,7 +1546,7 @@ LTDocumentMessage.builder()
     .build();
 ```
 
-- Customed Message 客制化訊息。如果以上的訊息總類無法達到使用的需求，可使用**LTCustomMessage**來傳送客製化訊息。可以利用 Json 格式帶入**msgContent**並搭配**LTMessageAttribute**設定訊息的行為模式。
+-   Customized Message: if the requirement goes beyond any above message types, use **LTCustomMessage** to send a customized message.Use Json format for **msgContent** and **LTMessageAttribute** to set the message action pattern.
 
 **LTMessageAttribute**
 
@@ -1580,9 +1575,9 @@ LTCustomMessage.builder()
 
 #### Relpy Messages
 
-回覆訊息可指定各類[Messages](#messages)訊息(LT:母訊息)進行回覆，並且也可回覆各類[Messages](#messages)訊息(LT:子訊息)。母訊息的指定方式是利用**LTReplyMessage**帶入各類子訊息中，**LTReplyMessage**設定的方式將會以母訊息傳送成功後收到的資訊帶入指定參數。另外需將母訊息收到的**msgID**帶入到子訊息的**parentMsgID**，當子訊息設定完成後即可利用[Send Message](#send-message)傳送。以下為圖片訊息與文字訊息交錯示範為例子。
+Reply messages : can reply to specified parrent [Messages](#messages), and also can reply all type of child [Messages](#messages).The way to specify parrent message is to use **LTReplyMessage** to bring in child message. **LTReplyMessage** will bring the success delivery info of the parent message in designated parameter. In addition, **msgID** of parent message needs to be brought in child message as **parentMsgID**. When child message is set, use [Send Message](#send-message) to send. Following is an image and text message sending example.
 
-- 圖片訊息(母訊息) 回覆 文字訊息(子訊息)
+-   Image message (Parent message) replies to a text message (child message)
 
 ```java
 LTReplyMessage replyMessage = LTReplyMessage.builder()
@@ -1614,7 +1609,7 @@ LTImageMessage imageMessage = LTImageMessage.builder()
 
 ```
 
-- 文字訊息(子訊息) 回覆 圖片訊息(母訊息)
+-   Text message (child message) replies to an image message (Parent message)
 
 ```java
 LTReplyMessage replyMessage = LTReplyMessage.builder()
@@ -1640,7 +1635,7 @@ LTTextMessage textMessage = LTTextMessage.builder()
 
 #### Send Message
 
-如需傳送各類訊息[Messages](#messages)以及回覆訊息[Relpy Messages](#reply_messages)，可使用`LTIMManager.getMessageHelper().sendMessage()`來傳送指定的訊息。傳送成功後會收到**LTSendMessageResponse**的結果，其中**LTMessage**可轉成各類訊息[Messages](#messages)的物件，並取得其專屬的資訊。可參考以下範例。
+When sending all types of [Messages](#messages) and [Relpy Messages](#reply_messages), use `LTIMManager.getMessageHelper().sendMessage()` to send it. After delivery is successful, shall receive the result of **LTSendMessageResponse**. **LTMessage** can be transformed into the object of all types of [Messages](#messages), and obtain its exclusive info. Please refer to the following example:
 
 ```java
 LTTextMessage textMessage = LTTextMessage.builder()
@@ -1660,15 +1655,13 @@ imManager.getMessageHelper().sendMessage(textMessage)
         @Override
         public void onNext(LTSendMessageResponse response) {
 
-            // 無檔案格式(文字訊息)，收到表示傳送成功。
             // get LTSendMessageResponse result
             String msgContent = ((LTTextMessage) message).getMsgContent();
 
-            // 檔案格式(圖片訊息)，收到需確認狀態。
             // get LTFileMessageResponse result
             if (response instanceof LTFileMessageResponse) {
                 LTFileMessageResponse fileMessageResponse = (LTFileMessageResponse) response;
-                // 傳檔狀態
+                // file
                 if (fileMessageResponse.getFileMessageStatus() == LTFileMessageStatus.STATUS_FILE) {
                     for (LTFileTransferResult result : fileMessageResponse.getFileTransferResults()) {
                         LTFileType fileType = result.getFileType();
@@ -1676,11 +1669,11 @@ imManager.getMessageHelper().sendMessage(textMessage)
                         long loadingBytes = result.getLoadingBytes();
                         long totalLength = result.getTotalLength();
                     }
-                //  訊息傳送成功狀態
+                // message
                 } else if(fileMessageResponse.getFileMessageStatus() == LTFileMessageStatus.STATUS_MESSAGE) {
-                    //原圖
+                    //origin
                     LTFileInfo fileInfo = ((LTImageMessage) message).getFileInfo();
-                    //縮圖
+                    //thumbnail
                     LTFileInfo thumbnailFileInfo = ((LTImageMessage) message).getThumbnailFileInfo();
                 }
             }
@@ -1703,7 +1696,7 @@ imManager.getMessageHelper().sendMessage(textMessage)
 
 ### Send Broadcast Messages
 
-[Send Message](#send-message)可發送一則各類訊息到指定對方或聊天室，若要一次發送多則訊息則可使用`LTIMManager.getMessageHelper().sendBroadcastMessages()`傳送至多個使用者或多間聊天室。廣播訊息後所收到的**LTBroadcastMessageResponse**結果，為廣播行為是否成功，傳送出的行為將會在[Receive Event-Message](#message-2)收到廣播的訊息。
+[Send Message](#send-message) can send any-type of message to any specified contact or channel. If want to send multiple messages please use `LTIMManager.getMessageHelper().sendBroadcastMessages()` to send multiple contacts or chatrooms. After broadcasting messages, it shall receive the sending result from **LTBroadcastMessageResponse** to see if it's a successful delivery. The broadcast message shall be received in [Receive Event-Message](#message-2).
 
 ```java
 LTTextMessage textMessage = LTTextMessage.builder()
@@ -1766,7 +1759,7 @@ imManager.getMessageHelper().sendBroadcastMessages(transIDE, chIDs, messages)
 
 ### Send Scheduled Messages
 
-如需將傳送的訊息設定指定的時間送達到使用者或聊天室時，請使用`LTIMManager.getMessageHelper().sendScheduledMessages()`傳送預約訊息並帶入指定的`timeToSend`，為預約的時間戳記。`timeToSend`請務必設定超過 1 分鐘並且在 30 天以內的時間。當指定的時間到達時，傳送出的訊息將會在[Receive Event-Message](#message-2)收到，並且同時預約者將會收到預約訊息確認送出的訓令。
+When sending messages to contact or chatrooms in the specified time to deliver, please use `LTIMManager.getMessageHelper().sendScheduledMessages()` sending scheduled message with specified `timeToSend` is a scheduled time tag. `timeToSend` must be set for at least 1 minute and maximum in 30 days. When time is up, the message shall be received in [Receive Event-Message](#message-2) and the sender shall also receive a sent-success signal.
 
 ```java
 LTTextMessage textMessage = LTTextMessage.builder()
@@ -1829,7 +1822,7 @@ imManager.getMessageHelper().sendScheduledMessages(transID, chIDs, messages, tim
 
 ### Send Forward Messages
 
-如需將已傳送的訊息，轉傳至其他使用者或聊天室時，可使用`LTIMManager.getMessageHelper().sendForwardMessages()`將各類訊息轉傳。轉傳訊息不需要組出訊息格式，只需要帶入轉傳訊息的`msgID`即可。轉傳訊息後所收到的`LTForwardMessageResponse`結果，為轉傳行為是否成功，傳送出的行為將會在[Receive Event-Message](#message-2)收到轉傳的訊息。
+Forward an already sent message to other user or chatrooms, use `LTIMManager.getMessageHelper().sendForwardMessages()` to forward all types of messages. No need to format the message, just bring in the `msgID` would be good. After forwarding, `LTForwardMessageResponse` shall notify if it's successfully sent. The forwarded message shall be seen in [Receive Event-Message](#message-2).
 
 ```java
 List<String> chIDs = new ArrayList<>();
@@ -1870,7 +1863,7 @@ imManager.getMessageHelper().sendForwardMessages(transID, chIDs, msgIDs)
 
 #### Message
 
-取得訊息資訊可呼叫`LTIMManager.getMessageHelper().queryMessage()`，利用帶入不同的參數取得不同的訊息資訊。參數中可指定特定的聊天室或是所有的聊天室，請利用`chID`來指定特定聊天室，否則請帶入`null`。撈取訊息方式使用指定的時間點並設定往前撈取或是往後撈取的方式，請搭配`markTS`以及`afterN`設定。`afterN`可設定正數即表示指定時間點往新的訊息撈取，負數則表示往舊的訊息撈取。建議設定範圍為正負 30，務必不要超過正負 100 以外。
+Get messages by query `LTIMManager.getMessageHelper().queryMessage()` by using different parameters to get different info. Can specify one chatroom or all chatrooms in parameters, please use `chID` to specify chatroom, or please use `null` if not. Capture messages by designated timing and set it as forward or backward capture, please use markTS and afterN. When afterN is a positive number means to capture data from the time stamp; if it's set as a negative time, means to capture data before the time stamp. Suggest to set it within positive/negative 30, never go beyond 100.
 
 ```java
 long markTS = System.currentTimeMillis();
@@ -1904,17 +1897,16 @@ imManager.getMessageHelper().queryMessage(transID, chID, markTS, afterN))
 
 #### File
 
-如需取得各式檔案類型必須使用**LTStorageManager**來取得檔案，可呼叫`LTStorageManager.execute`來執行取檔。可將**LTFileInfo**帶入到**LTStorageAction**的參數中。另外**LTFileInfo**則可由**LTSendMessageResponse**取得。
+When get all typs of files, use **LTStorageManager** to query `LTStorageManager.execute` to obtain the file. Can bring **LTFileInfo** in to **LTStorageAction** parameters. **LTFileInfo** can be get from **LTSendMessageResponse**
 
 The define method of LTStorageAction
 
-| Method | Description |
-| :-- | :-- |
-| createDownloadFileAction() | 取得下載檔案 |
-| createDownloadFileLinkAction() | 取得下載連結 |
-| createUploadFileAction() | 上傳檔案 |
-| createDeleteFileAction() | 刪除檔案 |
-
+| Method                         | Description             |
+| :----------------------------- | :---------------------- |
+| createDownloadFileAction()     | get the downloaded file |
+| createDownloadFileLinkAction() | get the downloaded link |
+| createUploadFileAction()       | upload file             |
+| createDeleteFileAction()       | delete file             |
 
 ```java
 LTMessage message = LTSendMessageResponse.getMessage();
@@ -1922,12 +1914,12 @@ LTMessage message = LTSendMessageResponse.getMessage();
 
 int expireMinute =30;
 
-//原圖
+//origin
 LTFileInfo fileInfo = ((LTImageMessage) message).getFileInfo();
 File file = new File("/output/file/path");
 LTStorageAction action = LTStorageAction.createDownloadFileAction(fileInfo, file);
 
-//縮圖
+//thumbnail
 LTFileInfo thumbnailFileInfo = ((LTImageMessage) message).getThumbnailFileInfo();
 File thumbnailFile = new File("/output/thumbnailFile/path");
 LTStorageAction actionThumbnail = LTStorageAction.createDownloadFileAction(thumbnailFileInfo, thumbnailFile);
@@ -1977,14 +1969,14 @@ try {
 
 ### Read Message
 
-此章節在介紹如何實作已讀功能
+This chapter shall introduce how to implement Read Message.
 
 #### Set Read
 
-設定已讀請使用`LTIMManager.getMessageHelper().markRead()`來送出已讀狀態。已讀的設定方式是將需標示的已讀訊息的`sendTime`帶入參數，需注意的是若設定此則訊息已讀時，會同時將此則訊息以前的訊息都是視同已讀狀態。使用情境，當每次進入聊天室時或是正在聊天室中收到即時訊息時可送出當下最後一則訊息的`sendTime`，視同此訊息以前的訊息都已讀取，不需再針對每一則訊息設定已讀狀態。同時也可從[Receive Event-Message](#message-2)收到他人的已讀狀態。
+Use `LTIMManager.getMessageHelper().markRead()` to send Read status. Set read is to bring `sendTime` of the read-message into the parameter. Please notice that once the read-message is set as read, all previous messages shall be set as been read too.The scenario is when the user enters a chatroom, or receives an instant message while in the room, the `sendTime` when the user sends the last message shall be set as all messages read, so there is no need to set every message to be read. Chatroom members' read status can be received from [Receive Event-Message](#message-2).
 
 ```java
-long sendTime = 1608797454000L //標示已讀訊息的sendTime
+long sendTime = 1608797454000L
 imManager.getMessageHelper().markRead(transID, chID, sendTime))
     .subscribe(new Observer<LTMarkReadResponse>() {
         @Override
@@ -2014,11 +2006,11 @@ imManager.getMessageHelper().markRead(transID, chID, sendTime))
 
 #### Get Read
 
-從[Set Read](#set-read)從了解如何設定自己的已讀資訊，接下來要來介紹如何取得他人的已讀資訊。在聊天室其他成員設定[Set Read](#set-read)後，可從[Receive Event-Message](#message-2)收到此成員的已讀狀態。並從收到的`LTMarkReadResponse`得知此成員的最後讀取的訊息時間，得而計算此成員在此聊天室的已讀狀態。若成員整傳送送已讀狀態，同時自己不在線上無法收到已讀狀態時，需當重新連線並回到聊天室時可呼叫[Member Read Info](#member-read-info)來取得聊天室成員的已讀狀態。</br>
+Understanding how to set oneself's read status from [Set Read](#set-read)，now goes to the way to get the other members' read status. After chatroom members set rad in [Set Read](#set-read), can receive member's read status from [Receive Event-Message](#message-2). By the member's last read time, received from `LTMarkReadResponse`, we can learn this member's read status in this chatroom. If the member has sent read status but he's offline to receive the read status, can query [Member Read Info](#member-read-info) when back online to get channel members' read status.
 
-除了使用每個成員的已讀資訊外，我們還提供針對每一則訊息的已讀狀態，可以針對每一則訊息來取的訊息的已讀資訊。
+Besides member's read status, we also provide read status for every single message.
 
--   MessageReadCount 可帶多筆的訊息查詢每一則訊息的已讀數量。
+-   MessageReadCount: can bring multiple messages to query the message read count.
 
 ```java
 List<String> msgIDs = new ArrayList<>();
@@ -2052,7 +2044,7 @@ imManager.getMessageHelper().queryMessageReadCount(transID, msgIDs))
     });
 ```
 
--   MessageReadUsers 可帶入指定訊息查詢此訊息的已讀清單。避免已讀清單資料量大，提供使用分批撈取的方式，`lastReadTime`可帶入上一批最後一個使用者的讀取時間，若是第一次請帶入`null`。
+-   MessageReadUsers: can bring sepcified message read list. To avoid overloading, LT provides capture by batch. `lastReadTime` can bring up the last user's read time in the last batch. If it's the first time, please bring `null`.
 
 ```java
 imManager.getMessageHelper().queryMessageReadUsers(transID, msgID, lastReadTime, count))
@@ -2084,11 +2076,11 @@ imManager.getMessageHelper().queryMessageReadUsers(transID, msgID, lastReadTime,
 
 ### Delete Message
 
-本章節介紹關於訊息刪除相關的功能。
+This chapter introduces the function of Delete Message.
 
 #### Delete a messages
 
-刪除多筆指定訊息，只會刪除自己在伺服器上的訊息，其他成員的訊息仍然存在。
+Delete messages would only delete onesel's messages on server, messages in other member's still exist.
 
 ```java
 List<String> msgIDs = new ArrayList<>();
@@ -2124,7 +2116,7 @@ imManager.getMessageHelper().deleteMessages(transID, msgIDs))
 
 #### Delete channel messages
 
-刪除指定聊天室的所有訊息，只會刪除自己在伺服器上的訊息，其他成員的訊息仍然存在。
+Delete channel messages in a chatroom would only delete onesef's messages on the server, messages in other member's still exist.
 
 ```java
 imManager.getMessageHelper().deleteChannelMessages(transID, chID))
@@ -2156,7 +2148,7 @@ imManager.getMessageHelper().deleteChannelMessages(transID, chID))
 
 #### Delete all messages
 
-刪除使用者的所有訊息，只會刪除自己在伺服器上的訊息，其他成員的訊息仍然存在。
+Delete all messages would only delete onesef's all messages on the server, messages in other member's still exist.
 
 ```java
 imManager.getMessageHelper().deleteAllMessages(transID))
@@ -2188,7 +2180,7 @@ imManager.getMessageHelper().deleteAllMessages(transID))
 
 ### Recall messages
 
-回收訊息功能，和刪除功能最大的差別在於，一但回收訊息後此聊天室的成員皆無法再取得此筆訊息。回收訊息目前設定只能回收使用者自己傳送的訊息，並提供可設定是否需要顯示回收系統訊息，可利用`silentMode`來設定是否需要顯示回收系統訊息。若設定`silentMode`為 true，此聊天室除了收到回收的訓令之外，原本的訊息將會被刪除。若希望可以顯示回收系統訊息，請設定`silentMode`為 false，此聊天室除了收到回收的訓令之外，原本的訊息將會保留，並提供回收狀態在此訊息的資訊中。
+Recall messages shall influence other member's query messages. Recall messages are only valid for the sender to recall his own messages. System log can be set to be shown or not shown. Use `silentMode` to decide the system log. Set `silentMode` as true, the chatroom would not only receive the signal of the recall message but also delete the message. If you wish to show the system log, please set `silentMode` as false, the chatroom would receive the signal of the recall message, but keep the recalled messages.
 
 ```java
 imManager.getMessageHelper().recallMessages(transID, messageIDList, false))
@@ -2220,7 +2212,7 @@ imManager.getMessageHelper().recallMessages(transID, messageIDList, false))
 
 ## User
 
-使用者設定值，包含全域使用者暱稱、頭像資訊以及通知設定值...等。
+User set values, including global nickname, avatar info and notification settings…etc.
 
 ```java
 LTIMManager imManager = LTSDK.getInstance().getIMManager(userID);
@@ -2230,11 +2222,11 @@ LTUserHelper userHelper = imManager.getUserHelper();
 
 ### Set User
 
-本章節介紹使用者本身的設定。
+This chapter shall introduce the user's settings.
 
 #### Set User Notification Setting
 
--   Notification Token 設定使用者每個裝置的專屬通知 Token。獲取 Token 方式請參考[Firebase Cloud Messaging](#firebase-cloud-messaging)
+-   Notification Token: set user's exclusive token for every device. How to get a token, please refer to [Firebase Cloud Messaging](#firebase-cloud-messaging).
 
 ```java
 imManager.getUserHelper().setUserPushToken(transID, key))
@@ -2264,12 +2256,12 @@ imManager.getUserHelper().setUserPushToken(transID, key))
     });
 ```
 
--   Notification Display 設定通知使否顯示發訊者名稱與訊息內容。
+-   Notification Display: set sender's name and content in notification.
 
-| Parameter     | Description                          |
-| :------------ | :----------------------------------- |
-| hidingSender  | 若為 false，則通知將不會有發訊者名稱 |
-| hidingContent | 若為 false，則將不會有通知訊息內容   |
+| Parameter     | Description                   |
+| :------------ | :---------------------------- |
+| hidingSender  | if False : no sender's name   |
+| hidingContent | if False : no message content |
 
 ```java
 boolean hidingSender = true;
@@ -2302,12 +2294,12 @@ imManager.getUserHelper().SetUserDeviceNotifyPreview(transID, hidingSender, hidi
     });
 ```
 
--   Notification Sound 設定通知聲音音效資訊。
+-   Notification Sound: set notification sound info.
 
-| Parameter | Description                             |
-| :-------- | :-------------------------------------- |
-| soundType | 這裡為音效型態，安卓請設定１為通知音效  |
-| soundID   | 聲音音效資訊，可設定音效路徑或是音效 ID |
+| Parameter | Description                          |
+| :-------- | :----------------------------------- |
+| soundType | Sound type, set 1 for Android.       |
+| soundID   | Sound ID, set sound path or sound ID |
 
 ```java
 int soundType = 1;
@@ -2340,12 +2332,12 @@ imManager.getUserHelper().setDeviceNotifySound(transID, soundType, soundID))
     });
 ```
 
--   Notification Mute 設定通知靜音與勿擾模式。
+-   Notification Mute: set notification as mute or do not disturb mode.
 
 | Parameter | Description |
 | :-- | :-- |
-| muteAll | 若為 true，則不會收到通知訊息 |
-| time | 勿擾模式，請設定時間戳記，在此設定的時間之前將不會收到任何通知。另外需注意 muteAll 若設定為 true，勿擾模式將無作用。若無需使用請設定`null` |
+| muteAll | If true, no notifications. |
+| time | Do not disturb mode. Set time tag. no notification before this time tag. Please notice that if muteAll was set true, do not disturb mode shall be invalid. If no need, please set `null`. |
 
 ```java
 boolean muteAll = true;
@@ -2380,9 +2372,9 @@ imManager.getUserHelper().setUserDeviceMute(transID, muteAll, time))
 
 #### Set User Profile
 
-更改使用者本身的設定。若設定成功後，除了本身收到設定的結果外，所有聊天室的成員皆會收到使用者更改的設定內容。
+Edit user profile: once set, beside oneself receive the changed result, all chatroom members shall receive the same changed result.
 
--   User Nickname 使用者全域的暱稱
+-   User Nickname: User's global nickname
 
 ```java
 imManager.getUserHelper().setUserNickname(transID, nickname)
@@ -2412,9 +2404,9 @@ imManager.getUserHelper().setUserNickname(transID, nickname)
     });
 ```
 
--   User Avatar 使用者全域的大頭照
+-   User Avatar: User's global avatar
 
-設定大頭照
+Set Avatar
 
 ```java
 Uri avatarUri = Uri.parse(Environment.getExternalStorageDirectory() + "/Download/image.jpg");
@@ -2429,7 +2421,7 @@ imManager.getUserHelper().setUserAvatar(transID, avatarUri)
         @Override
         public void onNext(LTUserProfileFileResponse userProfileFileResponse) {
 
-            // 傳檔狀態
+            // file
             if(userProfileFileResponse.getFileMessageStatus() == LTFileMessageStatus.STATUS_FILE) {
                 LTFileTransferResult result = userProfileFileResponse.getFileTransferResults().get(0);
                 LTFileType fileType = result.getFileType();
@@ -2437,7 +2429,7 @@ imManager.getUserHelper().setUserAvatar(transID, avatarUri)
                 long loadingBytes = result.getLoadingBytes();
                 long totalLength = result.getTotalLength();
             }
-            //  訊息傳送成功狀態
+            //  message
             else if(userProfileFileResponse.getFileMessageStatus() == LTFileMessageStatus.STATUS_MESSAGE) {
                 // get LTUserProfileFileResponse result (extends LTSetUserProfileResponse)
             }
@@ -2458,7 +2450,7 @@ imManager.getUserHelper().setUserAvatar(transID, avatarUri)
     });
 ```
 
-刪除大頭照
+Delete Avatar
 
 ```java
 
@@ -2473,7 +2465,7 @@ imManager.getUserHelper().deleteUserAvatar(transID, fileInfo)
 
         @Override
         public void onNext(LTUserProfileFileResponse userProfileFileResponse) {
-            //  檔案刪除成功狀態
+            //  file
             if(userProfileFileResponse.getFileMessageStatus() == LTFileMessageStatus.STATUS_MESSAGE) {
                 // get LTUserProfileFileResponse result (extends LTSetUserProfileResponse)
             }
@@ -2497,11 +2489,11 @@ imManager.getUserHelper().deleteUserAvatar(transID, fileInfo)
 
 ### Get User
 
-本章節介紹如何取得使用者本身的設定。
+This chapter introduces how to get User's setting.
 
 #### Get User Notification Setting
 
-取得此裝置的通知相關的設定值。
+Get notification setting of this device.
 
 ```java
 imManager.getUserHelper().queryDeviceNotify(transID))
@@ -2533,7 +2525,7 @@ imManager.getUserHelper().queryDeviceNotify(transID))
 
 #### Get User Profile
 
-取得此使用者相關資訊，可選擇使用`userID`或者是用`phoneNumber`來查詢使用者資訊。提醒注意的部分，當使用`phoneNumber`請務必搭配`brandID`查詢，資料才會正確。
+Get user profile : choose `userID` or `phoneNumber` to get user profile. Reminder: when using `phoneNumber`, `brandID` is also required for inquiry accuracy.
 
 ```java
 List<String> userIDs = new ArrayList<>();
@@ -2575,7 +2567,7 @@ imManager.getUserHelper().queryUserProfile(transID, userIDs, phoneNumbers, brand
 
 ## Receive Event
 
-當設定連線時，請務必先註冊**LTIMManagerListener**，可呼叫`imManager.setManagerListener`來獲取**LTIMManagerListener**中的事件。提醒注意本裝置送出的的訊息，只會當下的回應收到，不會利用**LTIMManagerListener**再次收到。
+When set connection, please do register **LTIMManagerListener** first, can query `imManager.setManagerListener` to get **LTIMManagerListener** event. Reminder: message from the device shall only be received only on prompt response, it won't use **LTIMManagerListener** to receive again.
 
 ```java
 imManager.setManagerListener(new LTIMManagerListener() {
@@ -2707,14 +2699,14 @@ imManager.setManagerListener(new LTIMManagerListener() {
 
 | Method | Description |
 | :-- | :-- |
-| onIncomingCreateChannel() | 收到聊天室建立的事件，可呼叫[Channel Information](#channel-information)來同步新建立的聊天室資訊 |
-| onIncomingDismissChannel() | 收到聊天室解散的事件 |
-| onIncomingChannelPreference() | 收到聊天室中專屬的設定值。一般來說會再多裝置設定時，收到同一個使用者更改的設定 |
-| onIncomingChannelProfile() | 收到聊天室共同設定 |
+| onIncomingCreateChannel() | Receive a create event, query [Channel Information](#channel-information) to sync channel creation info. |
+| onIncomingDismissChannel() | Receive a dismiss channel event. |
+| onIncomingChannelPreference() | Receive an exclusive setting value. Normally, multiple devices shall receive one user's edited setting. |
+| onIncomingChannelProfile() | Receive shared setting of a chatroom. |
 
 #### LTCreateChannelResponse
 
-繼承 **[LTMessageResponse](#ltmessageresponse)**
+Inherit **[LTMessageResponse](#ltmessageresponse)**
 
 | Parameter | Definition | Description |
 | :-- | :-- | :-- |
@@ -2723,11 +2715,11 @@ imManager.setManagerListener(new LTIMManagerListener() {
 
 #### LTDismissChannelResponse
 
-繼承 **[LTMessageResponse](#ltmessageresponse)**
+Inherit **[LTMessageResponse](#ltmessageresponse)**
 
 #### LTChannelPreferenceResponse
 
-繼承 **[LTMessageResponse](#ltmessageresponse)**
+Inherit **[LTMessageResponse](#ltmessageresponse)**
 
 | Parameter | Definition | Description |
 | :-- | :-- | :-- |
@@ -2735,7 +2727,7 @@ imManager.setManagerListener(new LTIMManagerListener() {
 
 #### LTChannelProfileResponse
 
-繼承 **[LTMessageResponse](#ltmessageresponse)**
+Inherit **[LTMessageResponse](#ltmessageresponse)**
 
 | Parameter | Definition | Description |
 | :-- | :-- | :-- |
@@ -2743,25 +2735,25 @@ imManager.setManagerListener(new LTIMManagerListener() {
 
 ### Channel Member
 
-| Method                   | Description                          |
-| :----------------------- | :----------------------------------- |
-| onIncomingJoinChannel()  | 收到聊天室其他成員加入的事件         |
-| onIncomingInviteMember() | 收到聊天室其他成員與自己被邀請的事件 |
-| onIncomingKickMember()   | 收到聊天室其他成員與自己被踢除的事件 |
-| onIncomingLeaveChannel() | 收到聊天室其他成員離開的事件         |
-| onIncomingMemberRole()   | 收到聊天室成員角色改變的事件         |
+| Method | Description |
+| :-- | :-- |
+| onIncomingJoinChannel() | Receive events when other member's join |
+| onIncomingInviteMember() | Receive events when been invited or other members been invited |
+| onIncomingKickMember() | Receive events when being invited or other members being kicked off |
+| onIncomingLeaveChannel() | Receive events when other members leaving |
+| onIncomingMemberRole() | Receive events when channel member role changed |
 
 #### LTJoinChannelResponse
 
-繼承 **[LTMessageResponse](#ltmessageresponse)**
+Inherit **[LTMessageResponse](#ltmessageresponse)**
 
-| Parameter | Definition | Description |
-| :-- | :-- | :-- |
-| members | Set\<[LTMemberProfile](#ltmemberprofile)\> | The member's info. |
+| Parameter | Definition                                 | Description        |
+| :-------- | :----------------------------------------- | :----------------- |
+| members   | Set\<[LTMemberProfile](#ltmemberprofile)\> | The member's info. |
 
 #### LTInviteMemberResponse
 
-繼承 **[LTMessageResponse](#ltmessageresponse)**
+Inherit **[LTMessageResponse](#ltmessageresponse)**
 
 | Parameter | Definition | Description |
 | :-- | :-- | :-- |
@@ -2770,7 +2762,7 @@ imManager.setManagerListener(new LTIMManagerListener() {
 
 #### LTKickMemberResponse
 
-繼承 **[LTMessageResponse](#ltmessageresponse)**
+Inherit **[LTMessageResponse](#ltmessageresponse)**
 
 | Parameter | Definition | Description |
 | :-- | :-- | :-- |
@@ -2782,7 +2774,7 @@ imManager.setManagerListener(new LTIMManagerListener() {
 
 #### LTLeaveChannelResponse
 
-繼承 **[LTMessageResponse](#ltmessageresponse)**
+Inherit **[LTMessageResponse](#ltmessageresponse)**
 
 | Parameter | Definition | Description |
 | :-- | :-- | :-- |
@@ -2792,7 +2784,7 @@ imManager.setManagerListener(new LTIMManagerListener() {
 
 #### LTMemberRoleResponse
 
-繼承 **[LTMessageResponse](#ltmessageresponse)**
+Inherit **[LTMessageResponse](#ltmessageresponse)**
 
 | Parameter | Definition | Description |
 | :-- | :-- | :-- |
@@ -2803,26 +2795,26 @@ imManager.setManagerListener(new LTIMManagerListener() {
 
 | Method | Description |
 | :-- | :-- |
-| onIncomingSendMessage() | 收到成員傳送的訊息事件 |
-| onIncomingScheduledMessage() | 收到多裝置的同一個使用者傳送的預約訊息 |
-| onIncomingScheduledInDueTimeMessage() | 收到自己發送的預約訊息已傳送出的事件 |
-| onIncomingMarkRead() | 收到成員的已讀事件 |
-| onIncomingDeleteAllMessages() | 收到多裝置的同一個使用者刪除所有訊息的事件 |
-| onIncomingDeleteChannelMessage() | 收到多裝置的同一個使用者刪除聊天室訊息的事件 |
-| onIncomingDeleteMessages() | 收到多裝置的同一個使用者刪除指定訊息的事件 |
-| onIncomingRecallMessage() | 收到成員回收訊息的事件 |
+| onIncomingSendMessage() | Receive events when members send messages |
+| onIncomingScheduledMessage() | Receive rescheduled message from a multiple-devices user |
+| onIncomingScheduledInDueTimeMessage() | Receive events when a scheduled message sent |
+| onIncomingMarkRead() | Receive events of members read message |
+| onIncomingDeleteAllMessages() | Receive delete message from a multiple-devices user |
+| onIncomingDeleteChannelMessage() | Receive delete chatroom from a multiple-devices user |
+| onIncomingDeleteMessages() | Receive delete specific message from a multiple-devices user |
+| onIncomingRecallMessage() | Receive events when a member recalls a message |
 
 #### LTSendMessageResponse
 
-繼承 **[LTMessageResponse](#ltmessageresponse)**
+Inherit **[LTMessageResponse](#ltmessageresponse)**
 
 | Parameter | Definition | Description |
 | :-- | :-- | :-- |
-| message | [LTMessage](#ltmessage) | 呼叫 [Send Message](#send-message)、[Send Broadcast Messages](#send-broadcast-messages) 以及 [Send Scheduled Messages](#send-scheduled-messages) 傳送出去的訊息 |
+| message | [LTMessage](#ltmessage) | Query [Send Message](#send-message), [Send Broadcast Messages](#send-broadcast-messages) and [Send Scheduled Messages](#send-scheduled-messages) to send messages |
 
 #### LTScheduledMessageResponse
 
-繼承 **[LTMessageResponse](#ltmessageresponse)**
+Inherit **[LTMessageResponse](#ltmessageresponse)**
 
 | Parameter | Definition | Description |
 | :-- | :-- | :-- |
@@ -2832,62 +2824,62 @@ imManager.setManagerListener(new LTIMManagerListener() {
 
 #### LTScheduledInDueTimeMessageResponse
 
-繼承 **[LTMessageResponse](#ltmessageresponse)**
+Inherit **[LTMessageResponse](#ltmessageresponse)**
 
 #### LTMarkReadResponse
 
-繼承 **[LTMessageResponse](#ltmessageresponse)**
+Inherit **[LTMessageResponse](#ltmessageresponse)**
 
 #### LTDeleteAllMessagesResponse
 
-繼承 **[LTMessageResponse](#ltmessageresponse)**
+Inherit **[LTMessageResponse](#ltmessageresponse)**
 
 #### LTDeleteChannelMessagesResponse
 
-繼承 **[LTMessageResponse](#ltmessageresponse)**
+Inherit **[LTMessageResponse](#ltmessageresponse)**
 
 #### LTDeleteMessagesResponse
 
-繼承 **[LTMessageResponse](#ltmessageresponse)**
+Inherit **[LTMessageResponse](#ltmessageresponse)**
 
 #### LTRecallMessageResponse
 
-繼承 **[LTMessageResponse](#ltmessageresponse)**
+Inherit **[LTMessageResponse](#ltmessageresponse)**
 
-| Parameter   | Definition | Description        |
-| :---------- | :--------- | :----------------- |
-| recallMsgID | String     | 被回收訊息的 msgID |
+| Parameter   | Definition | Description            |
+| :---------- | :--------- | :--------------------- |
+| recallMsgID | String     | recalled message msgID |
 
 ### User
 
 | Method | Description |
 | :-- | :-- |
-| onIncomingSetUserProfile() | 收到多裝置的同一個使用者更改本身個人資料的事件 |
-| onIncomingModifyUserProfile() | 收到聊天室成員之中更改資料的事件 |
+| onIncomingSetUserProfile() | Receive user profile change from a multiple-devices user |
+| onIncomingModifyUserProfile() | Receive events when chatroom member modifies profile info |
 
 #### LTSetUserProfileResponse
 
-繼承 **[LTMessageResponse](#ltmessageresponse)**
+Inherit **[LTMessageResponse](#ltmessageresponse)**
 
 | Parameter | Definition | Description |
 | :-- | :-- | :-- |
-| userProfile | Map\<String, Object\> | 當次更改的[User Profile](#user-profile)值 |
+| userProfile | Map\<String, Object\> | Current modified[User Profile](#user-profile) value |
 
 #### LTModifyUserProfileResponse
 
-繼承 **[LTMessageResponse](#ltmessageresponse)**
+Inherit **[LTMessageResponse](#ltmessageresponse)**
 
 | Parameter | Definition | Description |
 | :-- | :-- | :-- |
-| userProfiles | List\<Map\<String, Object\>\> | 聊天室其他成員更改的 [User Profile](#user-profile) 值 |
+| userProfiles | List\<Map\<String, Object\>\> | Chatroom member modified [User Profile](#user-profile) value |
 
-**<span id="user-profile">User Profile</span>** : 為 Map 格式如下，當下有被更動的才會取得。
+**<span id="user-profile">User Profile</span>** is Map format as below, only get when changed.
 
-| key            | Definition | Description        |
-| :------------- | :--------- | :----------------- |
-| userID         | String     | 使用者 ID          |
-| nickname       | String     | 使用者暱稱         |
-| profileImageFileInfo | LTFileInfo(#ltfileinfo)    | 使者者 Avatar 資訊 |
+| key                  | Definition              | Description        |
+| :------------------- | :---------------------- | :----------------- |
+| userID               | String                  | User's ID          |
+| nickname             | String                  | User's nickname    |
+| profileImageFileInfo | LTFileInfo(#ltfileinfo) | User's Avatar info |
 
 ## Appendix A. Other Error Code List
 
@@ -3049,15 +3041,15 @@ Y: Yes <br> N: No <br> O: Option <br>
 
 ### LTThumbnailFileMessage
 
-繼承 **[LTFileMessage](#ltfilemessage)**
+Inherit **[LTFileMessage](#ltfilemessage)**
 
-| Parameter       | Definition            | Description                  |
-| :-------------- | :-------------------- | :--------------------------- |
-| thumbnailFileInfo | LTFileInfo          | The server return thumbnail file info.|
+| Parameter         | Definition | Description                            |
+| :---------------- | :--------- | :------------------------------------- |
+| thumbnailFileInfo | LTFileInfo | The server return thumbnail file info. |
 
 ### LTFileMessage
 
-繼承 **[LTMessage](#ltmessage)**
+Inherit **[LTMessage](#ltmessage)**
 
 | Parameter       | Definition            | Description                  |
 | :-------------- | :-------------------- | :--------------------------- |
@@ -3083,111 +3075,111 @@ Y: Yes <br> N: No <br> O: Option <br>
 
 ### LTTextMessage
 
-繼承 **[LTMessage](#ltmessage)**
+Inherit **[LTMessage](#ltmessage)**
 
-| Parameter  | Definition            | Description      |
-| :--------- | :-------------------- | :--------------- |
-| msgContent | String                | 訊息內容         |
-| extInfo    | Map\<String, Object\> | 可輸入自定義資訊 |
-| tagUsers   | List\<LTTagUser\>     | 標記的成員       |
+| Parameter  | Definition            | Description       |
+| :--------- | :-------------------- | :---------------- |
+| msgContent | String                | message content   |
+| extInfo    | Map\<String, Object\> | self-defined info |
+| tagUsers   | List\<LTTagUser\>     | tagged user       |
 
 ### LTStickerMessage
 
-繼承 **[LTMessage](#ltmessage)**
+Inherit **[LTMessage](#ltmessage)**
 
-| Parameter  | Definition            | Description      |
-| :--------- | :-------------------- | :--------------- |
-| msgContent | String                | 貼圖內容         |
-| extInfo    | Map\<String, Object\> | 可輸入自定義資訊 |
+| Parameter  | Definition            | Description       |
+| :--------- | :-------------------- | :---------------- |
+| msgContent | String                | sticker content   |
+| extInfo    | Map\<String, Object\> | self-defined info |
 
 ### LTImageMessage
 
-繼承 **[LTThumbnailFileMessage](#ltthumbnailfilemessage)**
+Inherit **[LTThumbnailFileMessage](#ltthumbnailfilemessage)**
 
-| Parameter    | Definition | Description |
-| :----------- | :--------- | :---------- |
-| imageUri     | Uri        | 原圖路徑    |
-| thumbnailUri | Uri        | 縮圖路徑    |
+| Parameter    | Definition | Description         |
+| :----------- | :--------- | :------------------ |
+| imageUri     | Uri        | original image link |
+| thumbnailUri | Uri        | thumbnail link      |
 
 ### LTVideoMessage
 
-繼承 **[LTThumbnailFileMessage](#ltthumbnailfilemessage)**
-
-| Parameter    | Definition | Description |
-| :----------- | :--------- | :---------- |
-| videoUri     | Uri        | 影片路徑    |
-| thumbnailUri | Uri        | 縮圖路徑    |
-
-### LTVoiceMessage
-
-繼承 **[LTFileMessage](#ltfilemessage)**
-
-| Parameter | Definition | Description |
-| :-------- | :--------- | :---------- |
-| voiceUri  | Uri        | 語音檔路徑  |
-
-### LTContactMessage
-
-繼承 **[LTThumbnailFileMessage](#ltthumbnailfilemessage)**
+Inherit **[LTThumbnailFileMessage](#ltthumbnailfilemessage)**
 
 | Parameter    | Definition | Description    |
 | :----------- | :--------- | :------------- |
-| contactUri   | Uri        | 聯絡人檔案路徑 |
-| thumbnailUri | Uri        | 縮圖路徑       |
+| videoUri     | Uri        | Video link     |
+| thumbnailUri | Uri        | thumbnail link |
+
+### LTVoiceMessage
+
+Inherit **[LTFileMessage](#ltfilemessage)**
+
+| Parameter | Definition | Description     |
+| :-------- | :--------- | :-------------- |
+| voiceUri  | Uri        | voice file link |
+
+### LTContactMessage
+
+Inherit **[LTThumbnailFileMessage](#ltthumbnailfilemessage)**
+
+| Parameter    | Definition | Description       |
+| :----------- | :--------- | :---------------- |
+| contactUri   | Uri        | contact file link |
+| thumbnailUri | Uri        | thumbnail link    |
 
 ### LTLocationMessage
 
-繼承 **[LTMessage](#ltmessage)**
+Inherit **[LTMessage](#ltmessage)**
 
-| Parameter | Definition            | Description      |
-| :-------- | :-------------------- | :--------------- |
-| location  | LTLocation            | 地圖資訊         |
-| extInfo   | Map\<String, Object\> | 可輸入自定義資訊 |
+| Parameter | Definition            | Description       |
+| :-------- | :-------------------- | :---------------- |
+| location  | LTLocation            | map info          |
+| extInfo   | Map\<String, Object\> | self-defined info |
 
 ### LTDocumentMessage
 
-繼承 **[LTFileMessage](#ltfilemessage)**
-
-| Parameter | Definition | Description  |
-| :-------- | :--------- | :----------- |
-| fileUri   | Uri        | 文件檔案資訊 |
-
-### LTCustomMessage
-
-繼承 **[LTMessage](#ltmessage)**
-
-| Parameter   | Definition            | Description      |
-| :---------- | :-------------------- | :--------------- |
-| msgContent  | String                | 訊息內容         |
-| msgCategory | String                | 訊息分類         |
-| extInfo     | Map\<String, Object\> | 可輸入自定義資訊 |
-| attributes  | Long                  | 訊息的行為模式   |
-
-### LTFileInfo
-
-| Parameter            | Definition | Description      |
-| :------------------- | :--------- | :--------------- |
-| isExist             |  BOOL   | 檔案是否存在        |
-| filename             | String     | 檔案名稱         |
-| remoteFilePath       | String     | 檔案遠端路徑     |
-| fileContentType      | String     | 檔案類型         |
-| fileSize             | Long       | 檔案大小         |
-| storageDomain        | String     | LT 雲端 domain   |
-| storageID            | String     | LT 雲端 ID       |
-| endpointName         | String     | LT 雲端 endpoint |
-
-### LTLocation
+Inherit **[LTFileMessage](#ltfilemessage)**
 
 | Parameter | Definition | Description |
 | :-------- | :--------- | :---------- |
-| address   | String     | 位置地址    |
-| latitude  | double     | 位置緯度    |
-| longitude | double     | 位置經度    |
+| fileUri   | Uri        | file link   |
+
+### LTCustomMessage
+
+Inherit **[LTMessage](#ltmessage)**
+
+| Parameter   | Definition            | Description       |
+| :---------- | :-------------------- | :---------------- |
+| msgContent  | String                | message content   |
+| msgCategory | String                | message category  |
+| extInfo     | Map\<String, Object\> | self-defined info |
+| attributes  | Long                  | message attribute |
+
+### LTFileInfo
+
+| Parameter       | Definition | Description         |
+| :-------------- | :--------- | :------------------ |
+| isExist         | BOOL       | if file exists      |
+| filename        | String     | file name           |
+| remoteFilePath  | String     | fire remote path    |
+| fileContentType | String     | file content type   |
+| fileSize        | Long       | file size           |
+| storageDomain   | String     | LT storage domain   |
+| storageID       | String     | LT storage ID       |
+| endpointName    | String     | LT storage endpoint |
+
+### LTLocation
+
+| Parameter | Definition | Description        |
+| :-------- | :--------- | :----------------- |
+| address   | String     | location address   |
+| latitude  | double     | location latitude  |
+| longitude | double     | location longitude |
 
 ### LTTagUser
 
-| Parameter | Definition | Description       |
-| :-------- | :--------- | :---------------- |
-| start     | long       | 標記位置起始      |
-| length    | long       | 標記位置長度      |
-| userID    | String     | 標記成員的 UserID |
+| Parameter | Definition | Description      |
+| :-------- | :--------- | :--------------- |
+| start     | long       | tag point starts |
+| length    | long       | tag point length |
+| userID    | String     | tag user UserID  |

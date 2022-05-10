@@ -1,6 +1,6 @@
 # Manage API
 
-<sub>Last update time: 2021/02/25</sub>
+<sub>Last update time: 2022/05/10</sub>
 
 ---
 
@@ -120,8 +120,8 @@ The endpoint used for register SDK users is hosted as the following:
 | verifyMode | string | There is a fixed value: `turnkey`. |
 | turnkey | string | The **_{{LTSDK\_TurnKey}}_** issued by Loftech for your branded App. |
 | users | array of user object | A list of user objects you want to register to the SDK user. Maximum is **100** items. |
-| users.semiUID | string | The customized unique key of the member in your brand who wants to register the SDK.<li>支援任意字串，不區分大小寫。</li><li>最多不可超過 20 碼。</li><li>若需以手機號碼註冊時，請務必使用 E-164 手機號碼格式。</li>|
-| users.semiUID_PW | string | The password of the semiUID.<li>不可包含空字串，最多不可超過 20 碼。</li>|
+| users.semiUID | string | The customized unique key of the member in your brand who wants to register the SDK.<li>Support random strings, not case sensitive, no more than 20 characters.</li><li>If registered by mobile number, E-164 format is mandatory.</li> |
+| users.semiUID_PW | string | The password of the semiUID.<li>Blank string not allowed, no more than 20 characters.</li> |
 
 ### Response Body (JSON Format)
 
@@ -187,8 +187,8 @@ The endpoint used for authenticate SDK users is hosted as the following:
 
 | Property | Type | Description |
 | --- | --- | --- |
-| semiUID | string | The customized unique key of the member to authenticate.|
-| semiUID_PW | string | The password of the semiUID to authenticate.|
+| semiUID | string | The customized unique key of the member to authenticate. |
+| semiUID_PW | string | The password of the semiUID to authenticate. |
 
 ### Response Body (JSON Format)
 
@@ -213,22 +213,21 @@ The endpoint used for authenticate SDK users is hosted as the following:
 <br>
 <br>
 
-
-
 ## Return Code
 
 Return code for manager api
 
-| Property | Description |
-| --- | --- |
-|0|正確|
-|6|參數有誤|
-|10|註冊資料有錯     |
-|601|密碼錯誤  |
-|602|帳號不存在|
-|603|帳號已存在|
-|604|註冊需要輸入密碼|
-|605|品牌註冊人數超出了上限|
+| Property | Description                        |
+| -------- | ---------------------------------- |
+| 0        | Correct                            |
+| 6        | Wrong parameter                    |
+| 10       | Wrong register info                |
+| 601      | Wrong password                     |
+| 602      | Account doesn't exist              |
+| 603      | Account already existed            |
+| 604      | Password for registration required |
+| 605      | Brand registers exceeded limit     |
+
 ---
 
 <br>
