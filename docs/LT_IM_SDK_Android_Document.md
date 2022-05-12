@@ -1,6 +1,8 @@
 # LT IM SDK Android Document
 
-## <sub>Last update time: 2022/05/10</sub>
+<sub>Last update time: 2022/05/10</sub>
+
+---
 
 ## Overview
 
@@ -1399,7 +1401,7 @@ This chapter introduces LTIMSDK message sending and message types.
 
 #### Messages
 
-Below is what LTIMSDK supports in messge type，with following chapters of message sending [Send Message](#send-message), [Send Scheduled Messages](#send-scheduled-messages), [Send Broadcast Messages](#send-broadcast-messages).
+Below is what LTIMSDK supports in messge type, with following chapters of message sending [Send Message](#send-message), [Send Scheduled Messages](#send-scheduled-messages), [Send Broadcast Messages](#send-broadcast-messages).
 
 -   Text Message is for general text messages. To avoid overloading, limit the messages in 8000 characters. Text message supports tag type, use tag to specify specific member. specified member can be marked by using **LTTagUser**, accompanied by **start** and **length** in **LTTagUser** the displayed way replaced in **msgContent**.
 
@@ -1453,7 +1455,7 @@ LTImageMessage imageMessage = LTImageMessage.builder()
     .build();
 ```
 
--   Video Message: if using **LTVideoMessage** to send a video message，the message shall be sent to LT designated cloud space. If other designated space is required, use **LTCustomMessage** to customize the sending. In **LTVideoMessage**, can send original video or thumbnail file path by using client's local files. LT also provides an extInfo column for attached info, such as the dimension of the image to be displayed on the image.
+-   Video Message: if using **LTVideoMessage** to send a video message, the message shall be sent to LT designated cloud space. If other designated space is required, use **LTCustomMessage** to customize the sending. In **LTVideoMessage**, can send original video or thumbnail file path by using client's local files. LT also provides an extInfo column for attached info, such as the dimension of the image to be displayed on the image.
 
 ```java
 Uri videoUri = Uri.parse(Environment.getExternalStorageDirectory() + File.separator + "Download/test.mp4");
@@ -1474,7 +1476,7 @@ LTVideoMessage videoMessage = LTVideoMessage.builder()
     .build();
 ```
 
--   Voice Message: if using **LTVoiceMessage** to send a voice message，the message shall be sent to LT designated cloud space. If other designated space is required, use **LTCustomMessage** to customize the sending. In **LTVoiceMessage**, can send original video or thumbnail file path by using client's local files. LT also provides an extInfo column for attached info, such as the dimension of the image to be displayed on the image.
+-   Voice Message: if using **LTVoiceMessage** to send a voice message, the message shall be sent to LT designated cloud space. If other designated space is required, use **LTCustomMessage** to customize the sending. In **LTVoiceMessage**, can send original video or thumbnail file path by using client's local files. LT also provides an extInfo column for attached info, such as the dimension of the image to be displayed on the image.
 
 ```java
 Uri voiceUri = Uri.parse(Environment.getExternalStorageDirectory() + File.separator + "Download/27dc2d02-a0df-47d9-9443-f8678356e25e.aac");
@@ -1508,7 +1510,7 @@ LTLocationMessage locationMessage = LTLocationMessage.builder()
         .build();
 ```
 
--   Contact Message: if using **LTContactMessage** to send a contact message，the message shall be sent to LT designated cloud space. If other designated space is required, use **LTCustomMessage** to customize the sending. In **LTContactMessage**, can send original contact info or thumbnail file path by using client's local files. LT also provides an extInfo column for attached info, such as the contact displayed name on the image.
+-   Contact Message: if using **LTContactMessage** to send a contact message, the message shall be sent to LT designated cloud space. If other designated space is required, use **LTCustomMessage** to customize the sending. In **LTContactMessage**, can send original contact info or thumbnail file path by using client's local files. LT also provides an extInfo column for attached info, such as the contact displayed name on the image.
 
 ```java
 Uri contactUri = Uri.parse(Environment.getExternalStorageDirectory() + File.separator + "Download/27dc2d02-a0df-47d9-9443-f8678356e25e.vcf");
@@ -1528,7 +1530,7 @@ LTContactMessage.builder()
     .build());
 ```
 
--   Document Message: If using **LTDocumentMessage** to send a document message，the message shall be sent to LT designated cloud space. If other designated space is required, use **LTCustomMessage** to customize the sending. In **LTDocumentMessage**, can send original contact info or thumbnail file path by using client's local files. LT also provides an **extInfo** column for attached info, such as the file size to be displayed on the image.
+-   Document Message: If using **LTDocumentMessage** to send a document message, the message shall be sent to LT designated cloud space. If other designated space is required, use **LTCustomMessage** to customize the sending. In **LTDocumentMessage**, can send original contact info or thumbnail file path by using client's local files. LT also provides an **extInfo** column for attached info, such as the file size to be displayed on the image.
 
 ```java
 Uri documentUri = Uri.parse(Environment.getExternalStorageDirectory() + File.separator + "Download/27dc2d02-a0df-47d9-9443-f8678356e25e.doc");
@@ -2006,7 +2008,7 @@ imManager.getMessageHelper().markRead(transID, chID, sendTime))
 
 #### Get Read
 
-Understanding how to set oneself's read status from [Set Read](#set-read)，now goes to the way to get the other members' read status. After chatroom members set rad in [Set Read](#set-read), can receive member's read status from [Receive Event-Message](#message-2). By the member's last read time, received from `LTMarkReadResponse`, we can learn this member's read status in this chatroom. If the member has sent read status but he's offline to receive the read status, can query [Member Read Info](#member-read-info) when back online to get channel members' read status.
+Understanding how to set oneself's read status from [Set Read](#set-read), now goes to the way to get the other members' read status. After chatroom members set rad in [Set Read](#set-read), can receive member's read status from [Receive Event-Message](#message-2). By the member's last read time, received from `LTMarkReadResponse`, we can learn this member's read status in this chatroom. If the member has sent read status but he's offline to receive the read status, can query [Member Read Info](#member-read-info) when back online to get channel members' read status.
 
 Besides member's read status, we also provide read status for every single message.
 
@@ -2669,11 +2671,11 @@ imManager.setManagerListener(new LTIMManagerListener() {
 
 ### Common
 
-| Method              | Description        |
-| :------------------ | :----------------- |
-| onConnected()       | 已與伺服器連線     |
-| onDisconnected()    | 已與伺服器中斷連線 |
-| onIncomingMessage() | 一般訓令事件       |
+| Method              | Description          |
+| :------------------ | :------------------- |
+| onConnected()       | Connected to server  |
+| onDisconnected()    | Server disconnected  |
+| onIncomingMessage() | General Signal event |
 
 #### LTMessageResponse
 

@@ -274,7 +274,7 @@ Please always keep updating APNS Token. Otherwise, the users may not be able to 
 
 ## Start IM
 
-Please use `[LTSDK getIMManagerWithUserID:]` to get **LTIMManager** object，and use **LTIMManager** object to operate connection related services. After a call to the API, results may be obtained from the **Block** and [Receive Event](#receive-event). Be sure bring **transID** on every query, The **transID** is an exclusive ID for this API.
+Please use `[LTSDK getIMManagerWithUserID:]` to get **LTIMManager** object, and use **LTIMManager** object to operate connection related services. After a call to the API, results may be obtained from the **Block** and [Receive Event](#receive-event). Be sure bring **transID** on every query, The **transID** is an exclusive ID for this API.
 
 ```objectivec
 LTIMManager *manager = [LTSDK getIMManagerWithUserID:user.userID];
@@ -844,7 +844,7 @@ This chapter introduces LTIMSDK message sending and message types.
 
 #### Messages
 
-Below is what LTIMSDK supports in messge type，with the following chapters of [Send Message](#send-message), [Send Broadcast Messages](#send-broadcast-messages) and [Send Scheduled Messages](#send-scheduled-messages).
+Below is what LTIMSDK supports in messge type, with the following chapters of [Send Message](#send-message), [Send Broadcast Messages](#send-broadcast-messages) and [Send Scheduled Messages](#send-scheduled-messages).
 
 -   **_Text Message_**: Text Message is for general text messages. To avoid overloading, limit the messages in 8000 characters. Text message supports tag type, use tag to specify specific member. specified member can be marked by using **LTTagUser**, accompanied by **start** and **length** in **LTTagUser** the displayed way replaced in **msgContent**.
 
@@ -892,7 +892,7 @@ message.extInfo = extInfo;
 message.fileName = @"iOS.png";
 ```
 
--   **_Video Message_**: if using **LTVideoMessage** to send a video message，the message shall be sent to LT designated cloud space. If other designated space is required, use **LTCustomMessage** to customize the sending. In **LTVideoMessage**, can send original video or thumbnail file path by using client's local files. LT also provides an **extInfo** column for attached info, such as the dimension of the image to be displayed on the image.
+-   **_Video Message_**: if using **LTVideoMessage** to send a video message, the message shall be sent to LT designated cloud space. If other designated space is required, use **LTCustomMessage** to customize the sending. In **LTVideoMessage**, can send original video or thumbnail file path by using client's local files. LT also provides an **extInfo** column for attached info, such as the dimension of the image to be displayed on the image.
 
 ```objectivec
 NSString *videoFilePath = [[NSBundle mainBundle] pathForResource:@"video" ofType:@"mp4"];
@@ -910,7 +910,7 @@ message.extInfo = extInfo;
 message.fileName = @"iOS.mp4";
 ```
 
--   **_Voice Message_**: if using **LTVoiceMessage** to send a voice message，the message shall be sent to LT designated cloud space. If other designated space is required, use **LTCustomMessage** to customize the sending. In **LTVoiceMessage**, can send original video or thumbnail file path by using client's local files. LT also provides an **extInfo** column for attached info, such as the dimension of the image to be displayed on the image.
+-   **_Voice Message_**: if using **LTVoiceMessage** to send a voice message, the message shall be sent to LT designated cloud space. If other designated space is required, use **LTCustomMessage** to customize the sending. In **LTVoiceMessage**, can send original video or thumbnail file path by using client's local files. LT also provides an **extInfo** column for attached info, such as the dimension of the image to be displayed on the image.
 
 ```objectivec
 NSString *voiceFilePath = [[NSBundle mainBundle] pathForResource:@"voice" ofType:@"aac"];
@@ -941,7 +941,7 @@ message.chType = LTChannelTypeGroup;
 message.location = location;
 ```
 
--   **_Contact Message_**: if using **LTContactMessage** to send a contact message，the message shall be sent to LT designated cloud space. If other designated space is required, use **LTCustomMessage** to customize the sending. In **LTContactMessage**, can send original contact info or thumbnail file path by using client's local files. LT also provides an **extInfo** column for attached info, such as the contact displayed name on the image.
+-   **_Contact Message_**: if using **LTContactMessage** to send a contact message, the message shall be sent to LT designated cloud space. If other designated space is required, use **LTCustomMessage** to customize the sending. In **LTContactMessage**, can send original contact info or thumbnail file path by using client's local files. LT also provides an **extInfo** column for attached info, such as the contact displayed name on the image.
 
 ```objectivec
 NSString *contactFilePath = [[NSBundle mainBundle] pathForResource:@"contact" ofType:@"vcf"];
@@ -959,7 +959,7 @@ message.extInfo = extInfo;
 message.fileName = @"Ann.vcf";
 ```
 
--   **_Document Message_**: If using **LTDocumentMessage** to send a document message，the message shall be sent to LT designated cloud space. If other designated space is required, use **LTCustomMessage** to customize the sending. In **LTDocumentMessage**, can send original contact info or thumbnail file path by using client's local files. LT also provides an **extInfo** column for attached info, such as the file size to be displayed on the image.
+-   **_Document Message_**: If using **LTDocumentMessage** to send a document message, the message shall be sent to LT designated cloud space. If other designated space is required, use **LTCustomMessage** to customize the sending. In **LTDocumentMessage**, can send original contact info or thumbnail file path by using client's local files. LT also provides an **extInfo** column for attached info, such as the file size to be displayed on the image.
 
 ```objectivec
 NSString *documentFilePath = [[NSBundle mainBundle] pathForResource:@"document" ofType:@"doc"];
@@ -977,7 +977,7 @@ message.fileName = @"Document.docf";
 
 #### Relpy Messages
 
-Reply messages : can reply to specified parrent [Messages](#messages)，and also can reply all type of child [Messages](#messages). The way to specify parrent message is to use **LTReplyMessage** to bring in child message. **LTReplyMessage** will bring the successful delivery info of the parent message in designated parameter. In addition, **msgID** of parent message needs to be brought in child message as **parentMsgID**. When child message is set, use [Send Message](#send-message) to send. Following is an image and text message sending example.
+Reply messages : can reply to specified parrent [Messages](#messages), and also can reply all type of child [Messages](#messages). The way to specify parrent message is to use **LTReplyMessage** to bring in child message. **LTReplyMessage** will bring the successful delivery info of the parent message in designated parameter. In addition, **msgID** of parent message needs to be brought in child message as **parentMsgID**. When child message is set, use [Send Message](#send-message) to send. Following is an image and text message sending example.
 
 -   Image message (Parent message) replies to a text message (child message)
 
@@ -1046,7 +1046,7 @@ LTIMManager *manager = [LTSDK getIMManagerWithUserID:userID];
 }];
 ```
 
-**Send File Message**: send LTFileMessage (including LTImageMessage、LTVideoMessage、LTContactMessage...etc.)，If LT setting cloud space used, and needs the progress of sending, query `sendFileMessage:completion:progress:` received from callback. If file is sent successfully, it would receive message under [Receive Event - Message](#message-2) method [`LTIMManagerIncomingSendMessage:receiver:`](#message-2). Please refer to the following example.
+**Send File Message**: send LTFileMessage (including LTImageMessage、LTVideoMessage、LTContactMessage...etc.), If LT setting cloud space used, and needs the progress of sending, query `sendFileMessage:completion:progress:` received from callback. If file is sent successfully, it would receive message under [Receive Event - Message](#message-2) method [`LTIMManagerIncomingSendMessage:receiver:`](#message-2). Please refer to the following example.
 
 ```objectivec
 NSString *imageFilePath = [[NSBundle mainBundle] pathForResource:@"ef05f74a-90f7-4f69-94cb-d588fa435bae" ofType:@"png"];
@@ -1273,7 +1273,7 @@ NSInteger afterN = 30;
 
 #### Voting List
 
-取得聊天室投票訊息列表.
+Get chatroom voting list.
 
 ```objectivec
 NSString *transID = [[NSUUID UUID] UUIDString];
@@ -1288,9 +1288,9 @@ NSInteger afterN = 30;
 }];
 ```
 
-#### Voting OptionList
+#### Voting Options List
 
-Get Chatroom voting list
+Get chatroom voting options list.
 
 ```objectivec
 NSString *transID = [[NSUUID UUID] UUIDString];
@@ -1339,7 +1339,7 @@ NSArray *actions = [[NSArray alloc] initWithObjects:action, actionThumbnail, nil
 LTStorageManager *manager = [LTSDK getStorageManagerWithUserID:userID];
 [manager executeWithAcitons:actions completion:^(LTResponse * _Nonnull response, NSArray<LTStorageResult *> * _Nullable resultArray) {
     if (respose.returnCode == LTReturnCodeSuccess) {
-        //下載完成
+        //download success
     }
 } resultsChanged:^(NSArray<LTStorageResult *> * _Nullable resultArray) {
     for (LTStorageResult *result in resultArray) {
@@ -1683,7 +1683,7 @@ NSString *transID = [[NSUUID UUID] UUIDString];
 
 #### Query User: Query oneself or other user's info
 
-Use queried userID Array, queried phoneNumber (E164) Array and current located 的 brandID，bring in queryUserProfileWithTransID:userIDs:phoneNumbers:brandID:completion:`queryUserProfileWithTransID:userIDs:phoneNumbers:brandID:completion:` to get [User Nickname](#user-nickname) and [User Avatar](#user-avatar).
+Use queried userID Array, queried phoneNumber (E164) Array and current located 的 brandID, bring in queryUserProfileWithTransID:userIDs:phoneNumbers:brandID:completion:`queryUserProfileWithTransID:userIDs:phoneNumbers:brandID:completion:` to get [User Nickname](#user-nickname) and [User Avatar](#user-avatar).
 
 ```objectivec
 NSString *transID = [[NSUUID UUID] UUIDString];
