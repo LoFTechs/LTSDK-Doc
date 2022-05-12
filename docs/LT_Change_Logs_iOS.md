@@ -1,8 +1,26 @@
 # iOS Change Log
 
 ---
-### v5.2.2 (Jul 30, 2021)
-* 新增deleteChannelAvatar以及deleteUserAvatar兩隻api
 
-### v5.2.1 (Jul 15, 2021)
-* 設定profile時可支援各類型的image檔案格式。
+### 5.2.5
+
+-   [Fix] Remove expired call blocking.
+-   [Fix] Improve connection timeout issue.
+
+### 5.2.4
+
+-   [Update] Credential update.
+-   [Fix] Solve outgoing call issue.
+
+### 5.2.3
+
+-   [Update] Optimize threads.
+-   [Update] Internal SIP library.
+
+### 5.2.2
+
+-   [NEW] Add method: deleteChannelAvatar, deleteUserAvatar
+
+### 5.2.1
+
+-   [Update] Various types of image file formats are supported when setting profiles.

@@ -1,9 +1,19 @@
 # Android Change Log
 
 ---
-### v5.2.2 (Jul 30, 2021)
-* 新增deleteChannelAvatar以及deleteUserAvatar兩隻api
 
-### v5.2.1.1 (Jul 15, 2021)
-* 設定profile時可支援各類型的image檔案格式。
-  
+### 5.2.4
+
+-   [Fix] IM connection listener error in some cases.
+
+### 5.2.3
+
+-   [Update] Improve SDK setup time.
+
+### 5.2.2
+
+-   [NEW] Add method: deleteChannelAvatar, deleteUserAvatar
+
+### 5.2.1
+
+-   [Update] Various types of image file formats are supported when setting profiles.
