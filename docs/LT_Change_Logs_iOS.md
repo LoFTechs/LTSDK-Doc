@@ -1,6 +1,10 @@
 # iOS Change Log
 
 ---
+### 5.2.6
+-   [NEW] Pinning SSL.
+-   [NEW] Delete user.
+-   [Update] Internal SIP library.
 
 ### 5.2.5
 

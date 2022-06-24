@@ -1,7 +1,6 @@
 # LT IM SDK iOS Document
 
-<sub>Last update time: 2022/05/10</sub>
-
+<sub>Last update time: 2022/06/24</sub>
 ---
 
 ## Overview
@@ -151,7 +150,17 @@ When your App was logged in with different users or when the return code of `ini
     }
 }];
 ```
+### Delete User
 
+The `deletePrimaryUser` method can be used when the user needs to be removed from the server, it will delete the current user and clear the internal data.
+
+```objectivec
+[LTSDK deletePrimaryUserWithCompletion:^(LTResponse * _Nonnull response) {
+    if (response.returnCode == LTReturnCodeSuccess) {
+           
+    };
+}];
+```
 ## APNS
 
 Apple Push Notification service (APNs) is the centerpiece of the remote notifications feature. It is a robust, secure, and highly efficient service for app developers to propagate information to iOS (and, indirectly, watchOS), tvOS, and macOS devices. [See More](https://developer.apple.com/library/archive/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/APNSOverview.html#//apple_ref/doc/uid/TP40008194-CH8-SW1)
@@ -862,6 +871,7 @@ message.chID = @"ChannelID";
 message.chType = LTChannelTypeGroup;
 message.msgContent = @"@Paul, How are you?";
 message.tagUsers = tagUsers;
+message.customInfo = @"some info";
 ```
 
 -   **_Sticker Message_**: this sticker message can be LT owned stickers or replaced by self-defined sticker. When using self-defined sticker, use **msgContent** to acquire the sticker, such as the sticker file source.
@@ -1733,6 +1743,18 @@ NSString *userID = @"userID";
 
 When setting an online connection, please set **LTIMManager Delegate** and implement its **Protocol**.
 
+-   **Set Delegate**
+<br>- ignoreSelfIncoming: Default is true. 
+Incoming events for messages you send will be ignored..
+
+```objectivec
+NSString *userID = @"userID";
+LTIMManager *manager = [LTSDK getIMManagerWithUserID:userID];
+MyDelegate *delegateObject = [[MyDelegate alloc] init];
+manager.delegate = delegateObject;
+manager.ignoreSelfIncoming = NO;
+```
+
 -   **Implement Protocol**
 
 ```objectivec
@@ -1794,15 +1816,6 @@ When setting an online connection, please set **LTIMManager Delegate** and imple
 - (void)LTIMManagerIncomingModifyUserProfile:(LTModifyUserProfileResponse * _Nullable)response receiver:(NSString * _Nonnull)receiver {
 }
 @end
-```
-
--   **Set Delegate**
-
-```objectivec
-NSString *userID = @"userID";
-LTIMManager *manager = [LTSDK getIMManagerWithUserID:userID];
-MyDelegate *delegateObject = [[MyDelegate alloc] init];
-manager.delegate = delegateObject;
 ```
 
 ### Common
@@ -2178,6 +2191,8 @@ Y : Yes <br> N : No <br> O : Option <br>
 | chType | LTChannelType | The channel type. |
 | replyMessage | [LTReplyMessage](#ltmessage) | The object of the Mother message. |
 | parentMsgID | NSString | The message ID of the Mother message. |
+| customInfo | NSString | The customInfo of this message |
+| toRoleID | LTChannelRole | |
 
 ### LTThumbnailFileMessage
 

@@ -1,7 +1,6 @@
 # LT Call SDK iOS Document
 
-<sub>Last update time: 2022/01/18</sub>
-
+<sub>Last update time: 2022/06/24</sub>
 ---
 ## Overview
 
@@ -149,6 +148,17 @@ When your App was logged in with different users or when the return code of `ini
     if (response.returnCode == LTReturnCodeNotCurrentUser) {
         [LTSDK clean];
     }
+}];
+```
+### Delete User
+
+The `deletePrimaryUser` method can be used when the user needs to be removed from the server, it will delete the current user and clear the internal data.
+
+```objectivec
+[LTSDK deletePrimaryUserWithCompletion:^(LTResponse * _Nonnull response) {
+    if (response.returnCode == LTReturnCodeSuccess) {
+           
+    };
 }];
 ```
 
