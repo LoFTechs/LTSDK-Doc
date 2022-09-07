@@ -1,6 +1,6 @@
 # LT Call SDK Android Document
 
-<sub>Last update time: 2022/01/18</sub>
+<sub>Last update time: 2022/09/05</sub>
 
 ---
 ## Overview
@@ -263,6 +263,34 @@ LTSDK.clean(context).subscribe(new io.reactivex.Observer<Boolean>() {
         @Override
         public void onError(Throwable e) {
             //Clean SDK error
+        }
+
+        @Override
+        public void onComplete() {
+
+        }
+    });
+```
+
+### Delete User
+
+The `deletePrimaryUser` method can be used when the user needs to be removed from the server, it will delete the current user and clear the internal data.
+
+```java
+LTSDK.deletePrimaryUser().subscribe(new io.reactivex.Observer<LTResponse>() {
+        @Override
+        public void onSubscribe(Disposable d) {
+
+        }
+
+        @Override
+        public void onNext(LTResponse response) {
+            //success
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            //deletePrimaryUser error
         }
 
         @Override

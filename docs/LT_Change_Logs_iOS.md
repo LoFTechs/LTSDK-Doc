@@ -1,6 +1,10 @@
 # iOS Change Log
 
 ---
+
+### iOS: 5.2.7
+- [Fix] Call issue on iOS 16.
+
 ### 5.2.6
 -   [NEW] Pinning SSL.
 -   [NEW] Delete user.

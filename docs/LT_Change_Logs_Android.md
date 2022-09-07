@@ -1,6 +1,13 @@
 # Android Change Log
 
 ---
+### 5.2.6
+-   [NEW] Pinning SSL.
+-   [NEW] Support delete primary user.
+
+### 5.2.5
+-   [NEW] SDK interface support callback.
+-   [Fix] Compile error when developer target sdk >= 31.
 
 ### 5.2.4
 
