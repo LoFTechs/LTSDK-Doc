@@ -1,6 +1,6 @@
 # LT IM SDK iOS Document
 
-<sub>Last update time: 2022/06/24</sub>
+<sub>Last update time: 2023/05/09</sub>
 ---
 
 ## Overview
@@ -1527,13 +1527,15 @@ Receive Event :
 
 Recall messages shall influence other member's query messages. Recall messages are only valid for the sender to recall his own messages. If privileged, query `recallMessageWithTransID:msgIDs:silentMode:completion:`. After successful recall, will receive a **LTMessageTypeRecall** from **LTRecallResponse**, and trigger Receive Event - Message](#message-2) method [`LTIMManagerIncomingRecall:receiver:`](#message-2).
 
+**LTRecallMessageResponse** : recallMessages means the recall status of each message。
+
 -   **Silent Mode**: if set as true, after message recalled, original message would be queried; if set as false, cannot query the original message but the msgContent has been cleared.
 
 ```objectivec
 NSString *transID = [[NSUUID UUID] UUIDString];
 NSString *msgID = @"msgID";
 
-[helper recallMessageWithTransID:transID msgIDs:@[msgID] completion:^(BOOL success, LTErrorInfo * _Nullable error) {
+[helper recallMessageWithTransID:transID msgIDs:@[msgID] completion:^(LTRecallMessageResponse *response, LTErrorInfo *error) {
     if (error) {
         return;
     }
