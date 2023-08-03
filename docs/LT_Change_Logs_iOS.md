@@ -1,6 +1,10 @@
 # iOS Change Log
 
 ---
+
+### 5.2.9
+-   [Update] Convert Framework to an XCFramework.
+
 ### 5.2.8
 -   [Update] SRV cache.
 -   [Update] Support TLS 1.3.
