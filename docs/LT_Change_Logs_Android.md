@@ -1,6 +1,12 @@
 # Android Change Log
 
 ---
+
+### 5.3.0
+-   [NEW] Permission management services.
+-   [Fix] Fix application crash when push incomming.
+-   [Fix] Sometimes permission callback function not work.
+
 ### 5.2.6
 -   [NEW] Pinning SSL.
 -   [NEW] Support delete primary user.

@@ -1,6 +1,10 @@
 # iOS Change Log
 
 ---
+### 5.3.0
+-   [NEW] Permission management services.
+-   [Update] Data structure stability optimization.
+-   [Update] Support multiple call waiting.
 
 ### 5.2.9
 -   [Update] Convert Framework to an XCFramework.
