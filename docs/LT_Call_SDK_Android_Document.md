@@ -1,6 +1,6 @@
 # LT Call SDK Android Document
 
-<sub>Last update time: 2022/09/05</sub>
+<sub>Last update time: 2024/01/17</sub>
 
 ---
 ## Overview
@@ -13,7 +13,7 @@ With LT SDK, you can build your own customized application with Call and IM func
 
     Android 5.0 (API level 21) or higher ;</br>
     Java 8 or higher ;</br>
-    Gradle 5.4.1 or higher ;</br>
+    Gradle 7.3.3 or higher ;</br>
     Support Program language：Java, Kotlin
 
 ## Try the sample app
@@ -51,8 +51,6 @@ Step 3. Grant system permissions on your module level AndroidManifest.xml file:
 
 ```java
 <uses-permission android:name="android.permission.INTERNET" />
-<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 ```
 
@@ -111,16 +109,63 @@ LTSDK.init(options).subscribe(new Observer<Boolean>() {
 You can get user's information by calling `LTSDK.getInstance().getUsers()` method.
 
 ```java
-try {
-    LTSDK.getInstance().getUsers().subscribe(new io.reactivex.Observer<LTUsers>() {
+LTSDK.getInstance().getUsers().subscribe(new io.reactivex.Observer<LTUsers>() {
+    @Override
+    public void onSubscribe(Disposable d) {
+
+    }
+
+    @Override
+    public void onNext(LTUsers users) {
+        //Get user info
+    }
+
+    @Override
+    public void onError(Throwable e) {
+        //Error
+        if(e instanceof LTErrorInfo) {
+            int returnCode = ((LTErrorInfo) e).getReturnCode();
+            String errorMessage = ((LTErrorInfo) e).getErrorMessage();
+        }
+    }
+
+    @Override
+    public void onComplete() {
+
+    }
+});
+```
+
+#### The definition of LTUsers parameters
+
+| Parameter   | Definition | Detail                      |
+| :---------- | :--------- | :-------------------------- |
+| userID      | String     | LT unique user ID           |
+| uuid        | String     | LT unique user authenticate |
+| phoneNumber | String     | User's phone number          |
+| semiUID     | String     | Customized unique key to register |
+| deviceID    | String     | LT unique device ID          |
+| accountSrc  | String     | LT account source           |
+
+### Get user status
+
+Get the status of other users through their respective semiUIDs.
+
+Query with semiUIDs, using `LTSDK.getInstance().getUserStatusWithSemiUIDs()` method.
+
+```java
+List<String> semiUIDs = new ArrayList<>();
+semiUIDs.add("semiUID1");
+LTSDK.getInstance(). getUserStatusWithSemiUIDs(semiUIDs)
+    .subscribe(new io.reactivex.Observer<List<LTUserStatus>>() {
         @Override
         public void onSubscribe(Disposable d) {
 
         }
 
         @Override
-        public void onNext(LTUsers users) {
-            //Get user info
+        public void onNext(List<LTUserStatus> userStatuses) {
+            //Get other user info
         }
 
         @Override
@@ -137,98 +182,6 @@ try {
 
         }
     });
-} catch (LTSDKNoInitializationException e) {
-    e.printStackTrace();
-}
-```
-
-#### The definition of LTUsers parameters
-
-| Parameter   | Definition | Detail                      |
-| :---------- | :--------- | :-------------------------- |
-| userID      | String     | LT unique user ID           |
-| uuid        | String     | LT unique user authenticate |
-| phoneNumber | String     | User's phone number          |
-| semiUID     | String     | Customized unique key to register |
-| deviceID    | String     | LT unique device ID          |
-| accountSrc  | String     | LT account source           |
-
-### Get user status
-
-Get the status of other users through their respective phoneNumbers or semiUIDs.
-
-1.query with phonenumbers, use `LTSDK.getInstance().getUserStatuswithPhoneNumber()` method.
-
-```java
-List<String> phones = new ArrayList<>();
-phones.add("+886912345678");
-try {
-    LTSDK.getInstance().getUserStatusWithPhoneNumbers(phones)
-        .subscribe(new io.reactivex.Observer<List<LTUserStatus>>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(List<LTUserStatus> userStatuses) {
-                //Get other user info
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                //Error
-                if(e instanceof LTErrorInfo) {
-                    int returnCode = ((LTErrorInfo) e).getReturnCode();
-                    String errorMessage = ((LTErrorInfo) e).getErrorMessage();
-                }
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        });
-} catch (LTSDKNoInitializationException e) {
-    e.printStackTrace();
-}
-```
-
-2.query with semiUIDs, using `LTSDK.getInstance().getUserStatusWithSemiUIDs()` method.
-
-```java
-List<String> semiUIDs = new ArrayList<>();
-semiUIDs.add("semiUID1");
-try {
-    LTSDK.getInstance(). getUserStatusWithSemiUIDs(semiUIDs)
-        .subscribe(new io.reactivex.Observer<List<LTUserStatus>>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(List<LTUserStatus> userStatuses) {
-                //Get other user info
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                //Error
-                if(e instanceof LTErrorInfo) {
-                    int returnCode = ((LTErrorInfo) e).getReturnCode();
-                    String errorMessage = ((LTErrorInfo) e).getErrorMessage();
-                }
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        });
-} catch (LTSDKNoInitializationException e) {
-    e.printStackTrace();
-}
 ```
 
 #### LTUserStatus
@@ -246,10 +199,10 @@ try {
 
 ### Clean SDK
 
-When your App was logged in with different users or when the return code of `LTSDK.init` from `LTErrorInfo` is 6000, be sure to call `LTSDK.clean`.
+When your App was logged in with different users or when the return code of `LTSDK.init` from `LTErrorInfo` is 6000, be sure to call `LTSDK.clean` or `LTSDK.cleanData`.
 
 ```java
-LTSDK.clean(context).subscribe(new io.reactivex.Observer<Boolean>() {
+LTSDK.cleanData().subscribe(new io.reactivex.Observer<Boolean>() {
         @Override
         public void onSubscribe(Disposable d) {
 
@@ -308,9 +261,7 @@ Firebase Cloud Messaging sends notifications and messages to devices which have 
 
 ### Prerequisites
 
-- A device running Android 4.0 or higher, and Google Play services 15.0.0 or higher.
-- FirebaseMessaging API and Android Studio 1.4 or higher with Gradle.
-
+-   A device running Android 5.0 or higher, and FCM using the BoM services 26.8.0 or higher.
 
 ### Connect your App to Firebase
 
@@ -354,14 +305,19 @@ buildscript {
 
   repositories {
     // Check that you have the following line (if not, add it):
-    google()  // Google's Maven repository
+    google()
+    jcenter()
+    mavenCentral()
+    maven {
+        url "https://dl.bintray.com/videolan/Android"
+    }
   }
 
   dependencies {
     // ...
 
     // Add the following line:
-    classpath 'com.google.gms:google-services:4.3.5'  // Google Services plugin
+    classpath 'com.google.gms:google-services:4.3.15'  // Google Services plugin
   }
 }
 
@@ -589,7 +545,6 @@ try {
     extInfo.put("key1","value2");
     extInfo.put("key2","value2");
 
-
     LTcallCenterManager callCenterManager = LTSDK.getInstance().getcallCenterManager();
 
     // init a call by callee's userID
@@ -598,13 +553,10 @@ try {
                 .setExtInfo(extInfo)
                 .build();
 
-    // init a call by callee's phone number
-    //LTCallOptions callOptions = new LTCallOptions.PhoneNumberBuilder()
-    //            .setIsRCode("00_123")
-    //            .setPhoneNumber("0912345678")
-    //            .setExtInfo(extInfo)
-    //            .build();
-    LTCall ltCall = callCenterManager.startCallWithUserID( callerUserID, callOptions, new LTCallStateListener() {
+    NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context, channelID);
+    int notificationID = 1;
+
+    LTCall ltCall = callCenterManager.startCallWithUserID(callerUserID, callOptions, new LTCallStateListener() {
             @Override
             public void onLTCallStateRegistered(LTCall ltCall) {
 
@@ -633,7 +585,7 @@ try {
             @Override
             public void onLTCallConnectionDuration(LTCall ltCall, int duration) {
 
-            });
+            }, notificationBuilder, notificationID);
 
 } catch (ClassNotFoundException e) {
     Log.d(TAG, "ClassNotFoundException:" + e.getMessage());
@@ -656,6 +608,9 @@ LTCallOptions callOptions = new LTCallOptions.GroupCallOptionsBuilder()
         .setGroupCallAppChID("chID")
         .setGroupCallMembers(members)
         .build();
+
+NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context, channelID);
+int notificationID = 1;
 
 try {
     LTCallCenterManager callCenterManager = LTSDK.getInstance().getcallCenterManager();
@@ -690,7 +645,7 @@ try {
         public void onLTCallConnectionDuration(LTCall call, int duration) {
 
         }
-    });
+    }, notificationBuilder, notificationID);
 
 } catch (ClassNotFoundException e) {
     Log.d(TAG, "ClassNotFoundException:" + e.getMessage());
@@ -747,54 +702,47 @@ try {
     callCenterManager.setCallNotificationListener(new LTCallNotificationListener() {
         @Override
         public void onLTCallNotification(LTCallNotificationMessage callNotificationMessage) {
-            // receive custom message from caller
-            for (Map.Entry<String, Object> entry : callNotificationMessage.getCallOptions().getExtInfo().entrySet()) {
-                Log.d(TAG, "key: " + entry.getKey() + " value: " + entry.getValue());
-            }
-
-
-            // receiver a incoming call, do satrt call and Activity
+            LTCallCenterManager callCenterManager = LTSDK.getInstance().getcallCenterManager();
+            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context, channelID);
+            int notificationID = 1;
             LTCall ltCall = callCenterManager.startCallWithNotificationMessage(callNotificationMessage, new LTCallStateListener() {
-            @Override
-            public void onLTCallStateRegistered(LTCall ltCall) {
-                ltCall.acceptCall();
-            }
+                @Override
+                public void onLTCallStateRegistered(LTCall ltCall) {
 
-            @Override
-            public void onLTCallStateConnected(LTCall ltCall) {
+                }
 
-            }
+                @Override
+                public void onLTCallStateConnected(LTCall ltCall) {
 
-            @Override
-            public void onLTCallStateTerminated(LTCall ltCall, LTCallStatusCode callStatusCode) {
+                }
 
-            }
+                @Override
+                public void onLTCallStateTerminated(LTCall ltCall, LTCallStatusCode callStatusCode) {
 
-            @Override
-            public void onLTCallStateWarning(LTCall ltCall, LTCallStatusCode callStatusCode) {
+                }
 
-            }
+                @Override
+                public void onLTCallStateWarning(LTCall ltCall, LTCallStatusCode callStatusCode) {
 
-            @Override
-            public void onLTCallMediaStateChanged(LTCall ltCall, LTMediaType mediaType) {
+                }
 
-            }
+                @Override
+                public void onLTCallMediaStateChanged(LTCall ltCall, LTMediaType mediaType) {
 
-            @Override
-            public void onLTCallConnectionDuration(LTCall ltCall, int duration) {
+                }
 
-            }
-        });
+                @Override
+                public void onLTCallConnectionDuration(LTCall ltCall, int duration) {
 
-
+                }
+            }, notificationBuilder, notificationID);
         }
-
+        
         @Override
         public void onLTCallCDRNotification(LTCallCDRNotificationMessage callCDRNotificationMessage) {
             // The callback needs to be work with IM service
         }
     });
-
 } catch (ClassNotFoundException e) {
     Log.d(TAG, "ClassNotFoundException:" + e.getMessage());
 } catch (LTSDKNoInitializationException e) {
@@ -908,10 +856,10 @@ During a call, both the caller and callee can be set audio route by the `ltCall.
 ltCall.setAudioRout(audioRoute);
 
 // Get current audio route
-LTAudioRoute audioRoute = ltCall.getCurrentAudioRoute();
+LTAudioRoute audioRoute = LTAudioRouteManager.getInstance().getCurrentAudioRoute();
 
 // Get available audio route
- ArrayList<LTAudioRoute> audioRouteArray = ltCall.getAvailableAudioRoutes();
+ ArrayList<LTAudioRoute> audioRouteArray = LTAudioRouteManager.getInstance().getAvailableAudioRoutes();
 ```
 
 ##### LTAudioRoute
@@ -953,8 +901,7 @@ If you want to re-invite a group call member who has left the call, you can use 
 
 ```java
 // re-invite a group call member
-[call reinviteGroupCall];
-
+ltCall.reinviteGroupCall();
 ```
 
 ### Call history
@@ -1005,10 +952,10 @@ callCenterManager.queryCDRWithUserID(userID, markTS, count)
 
 ### Call notification
 
-When call state change, You can set custom notification by `setAndroidNotification()` method with the parameter, <a href="https://developer.android.com/reference/androidx/core/app/NotificationCompat.Builder" title="Title">NotificationCompat.Builder</a> and notificationID. The default is LT style notification.
+When call state change, You can set custom notification by `updateAndroidCallNotification()` method with the parameter, <a href="https://developer.android.com/reference/androidx/core/app/NotificationCompat.Builder" title="Title">NotificationCompat.Builder</a> and notificationID. The default is LT style notification.
 
 ```java
-setAndroidNotification(NotificationCompat.Builder builder, int notificationID);
+NotificationCenter.getInstance().updateAndroidCallNotification(NotificationCompat.Builder builder, int notificationID);
 ```
 
 ### Call Blocking

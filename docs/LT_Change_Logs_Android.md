@@ -1,6 +1,11 @@
 # Android Change Log
 
 ---
+### 5.3.1
+-   [Update] SDK target sdk 31.
+-   [Fix] Update library and fix security issue.
+-   [Fix] Background started FGS: Disallowed LtCallservice
+
 
 ### 5.3.0
 -   [NEW] Permission management services.
