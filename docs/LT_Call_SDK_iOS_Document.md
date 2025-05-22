@@ -1,7 +1,9 @@
 # LT Call SDK iOS Document
 
 <sub>Last update time: 2023/05/09</sub>
+
 ---
+
 ## Overview
 
 With LT SDK, you can build your own customized application with Call and IM function. This documentary provides a guideline that demonstrates how to build and configure an in-app message and call using LT SDK.
@@ -17,7 +19,7 @@ With LT SDK, you can build your own customized application with Call and IM func
 
 The sample application has the core functions of our LT SDK. Download the app from our GitHub repository to get an idea of what you can build with the SDK and start building in your project.
 
-[Download sample app](https://github.com/LoFTechs/LTSample-iOS-Swift)
+[Download sample app](https://github.com/LoFTechs/LTCallSample-iOS-ObjectiveC)
 
 ## Getting started
 

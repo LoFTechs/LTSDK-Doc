@@ -21,7 +21,7 @@ With LT SDK, you can build your own customized application with Call and IM func
 
 The sample application has the core functions of our LT SDK. Download the app from our GitHub repository to get an idea of what you can build with the SDK and start building in your project.
 
-[Download sample app](https://github.com/LoFTechs/LTSample-Android-Kotlin)
+[Download sample app](https://github.com/LoFTechs/LTIMSmaple-Android-Kotlin)
 
 ## Getting started
 

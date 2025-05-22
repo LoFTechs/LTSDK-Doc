@@ -17,7 +17,7 @@
 -   [Update] Support TLS 1.3.
 -   [Update] Voice Quality Optimization.
 
-### iOS: 5.2.7
+### 5.2.7
 -   [Fix] Call issue on iOS 16.
 
 ### 5.2.6
