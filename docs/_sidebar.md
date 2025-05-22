@@ -1,13 +1,15 @@
 -   [Manage API](/LT_SDK_BE.md)
 -   IM SDK
     -   [Android](/LT_IM_SDK_Android_Document.md)
+    -   [Android_Sample](https://github.com/LoFTechs/LTIMSmaple-Android-Kotlin)
     -   [iOS](/LT_IM_SDK_iOS_Document.md)
+    -   [iOS_Sample](https://github.com/LoFTechs/LTIMSample-iOS-ObjectiveC)
+
 -   Call SDK
     -   [Android](/LT_Call_SDK_Android_Document.md)
+    -   [Android_Sample](https://github.com/LoFTechs/LTCallSmaple-Android-Kotlin)
     -   [iOS](/LT_Call_SDK_iOS_Document.md)
+    -   [iOS_Sample](https://github.com/LoFTechs/LTCallSample-iOS-ObjectiveC)
 -   Change Logs
     -   [Android](/LT_Change_Logs_Android.md)
     -   [iOS](/LT_Change_Logs_iOS.md)
--   Sample APP
-    -   [Android](https://github.com/LoFTechs/LTSample-Android-Kotlin)
-    -   [iOS](https://github.com/LoFTechs/LTSample-iOS-Swift)
