@@ -1,6 +1,14 @@
 # iOS Change Log
 
 ---
+### 5.3.3
+-   [Update] Credential update.
+-   [Update] Voice Quality Optimization.
+-   [Update] Connection quality optimization.
+
+### 5.3.2
+-   [NEW] Update privacy manifests.
+  
 ### 5.3.1
 -   [NEW] Add privacy manifests & digital signatures.
 
