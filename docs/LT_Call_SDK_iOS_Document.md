@@ -1,6 +1,6 @@
 # LT Call SDK iOS Document
 
-<sub>Last update time: 2023/05/09</sub>
+<sub>Last update time: 2025/12/09</sub>
 
 ---
 

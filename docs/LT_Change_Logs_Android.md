@@ -1,6 +1,12 @@
 # Android Change Log
 
 ---
+
+### 5.3.2
+-   [Update] SDK target sdk 35.
+-   [Update] Support 16 KB page size alignment on Android.
+
+
 ### 5.3.1
 -   [Update] SDK target sdk 31.
 -   [Fix] Update library and fix security issue.

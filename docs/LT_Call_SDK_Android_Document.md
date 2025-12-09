@@ -1,6 +1,6 @@
 # LT Call SDK Android Document
 
-<sub>Last update time: 2024/01/17</sub>
+<sub>Last update time: 2025/12/09</sub>
 
 ---
 
@@ -12,9 +12,9 @@ With LT SDK, you can build your own customized application with Call and IM func
 2. In order to connect to the LT service please read the [Authentication](#authentication).
 3. Support Version:
 
-    Android 5.0 (API level 21) or higher ;</br>
-    Java 8 or higher ;</br>
-    Gradle 7.3.3 or higher ;</br>
+    Android 8.0 (API level 26) or higher ;</br>
+    Java 17 or higher ;</br>
+    Gradle 8 or higher ;</br>
     Support Program language：Java, Kotlin
 
 ## Try the sample app
