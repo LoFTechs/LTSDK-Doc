@@ -1,6 +1,6 @@
 # Manage API
 
-<sub>Last update time: 2022/05/10</sub>
+<sub>Last update time: 2026/08/18</sub>
 
 ---
 
@@ -75,6 +75,7 @@ The endpoint used for request a certification token is hosted as the following:
 
 <br>
 <br>
+
 
 ## Register Account
 
@@ -207,6 +208,78 @@ The endpoint used for authenticate SDK users is hosted as the following:
 | semiUID | string | The ID of the user in your brand who wants to register the SDK. |
 | userID | string | The identifier of SDK user. |
 | uuid | string | The password of SDK user. |
+
+---
+
+<br>
+<br>
+
+## Get User token
+
+- This API retrieves the {{User_Token}} for a specific SDK user (identified by `userID` and `uuid`), which is required when using the **WebSDK** to call other APIs on behalf of that user.
+- **Note:** This API is IP-bound. When applying for a developer account, please provide the IP address(es) to be whitelisted; requests from an unbound IP will be rejected.
+
+
+### Endpoint
+
+The endpoint used for request a certification token is hosted as the following:
+
+```curl
+{{authapi-url}}/oauth2/getUserTokenBasicV2
+```
+
+### Request headers
+
+| Header | Value | Description |
+| --- | --- | --- |
+| Authorization | <code>Basic **_{{Basic\_Auth}}_**</code> | Please contact technical service to get the developer ID and secret, and follow the HTTP Basic Authentication[RFC 2617]。<br>According to the RFC 2617 Basic Authentication rule, **_{{Basic\_Auth}}_** is a base64 encoded string by combining the **_{{Developer\_Account}}_** and **_{{Developer\_Password}}_** separated by a single colon (":") character. |
+| Content-Type | `application/json` | Every request must include a **Content-Type** header. |
+| Brand-Id | <code>**_{{Brand\_ID}}_**</code> | The identifier of your brand. |
+
+### Request Body (JSON Format)
+
+```json
+{
+    "userID": "axlqggyytacaal4v",
+    "uuid": "ab6aad54-1234-4b90-5678-6ba26e3f2153"
+}
+```
+
+| Property | Type | Description |
+| --- | --- | --- |
+| userID | string | The identifier of SDK user. |
+| uuid | string | The password of SDK user. |
+
+### Response Body (JSON Format)
+
+```json
+{
+    "returnCode": 0,
+    "accessToken": "eyJ0eXAiOierV1QiLCJhbGciOiJSU...."
+}
+```
+
+| Property | Type | Description |
+| --- | --- | --- |
+| returnCode | number | Return status, 0 represents succeeded. |
+| accessToken | string | The **_{{User\_Token}}_** (OAuth JWT) you successfully accessed. |
+
+#### About **_{{User\_Token}}_**
+
+-   The obtained **_{{User\_Token}}_** (OAuth JWT) is decoded with Base64, or you can analyze the following information using [jwt.io website](https://jwt.io).
+-   Its payload includes the following information:
+
+| Property | Type | Description |
+| --- | --- | --- |
+| id | string | ID of JWT. |
+| iss | string | JWT issuer. |
+| aud | string | JWT issued DeveloperID. |
+| sub | string | JWT that represent User ID. |
+| exp | number | JWT expired Timestamp(Measure of unit = seconds), this timestamp must be greater than iat's timestamp. |
+| iat | number | JWT issued Timestamp(Measure of unit = seconds). |
+| token_type | string | It should be set to `bearer`. |
+| scope | string | The permission to access to Loftech's services. |
+| brand_id | string | BrandID of User. |
 
 ---
 

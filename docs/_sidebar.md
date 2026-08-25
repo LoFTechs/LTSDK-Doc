@@ -4,6 +4,7 @@
     -   [Android_Sample](https://github.com/LoFTechs/LTIMSmaple-Android-Kotlin)
     -   [iOS](/LT_IM_SDK_iOS_Document.md)
     -   [iOS_Sample](https://github.com/LoFTechs/LTIMSample-iOS-ObjectiveC)
+    -   [Web](/LT_IM_SDK_Javascript_Document.md)
 
 -   Call SDK
     -   [Android](/LT_Call_SDK_Android_Document.md)
@@ -13,3 +14,4 @@
 -   Change Logs
     -   [Android](/LT_Change_Logs_Android.md)
     -   [iOS](/LT_Change_Logs_iOS.md)
+    -   [Web](/LT_Change_Logs_Web.md)
