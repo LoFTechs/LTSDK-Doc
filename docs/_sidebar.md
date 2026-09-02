@@ -5,6 +5,7 @@
     -   [iOS](/LT_IM_SDK_iOS_Document.md)
     -   [iOS_Sample](https://github.com/LoFTechs/LTIMSample-iOS-ObjectiveC)
     -   [Web](/LT_IM_SDK_Javascript_Document.md)
+    -   [Web_Sample](https://github.com/LoFTechs/LTIMSDK-Web-Javascript)
 
 -   Call SDK
     -   [Android](/LT_Call_SDK_Android_Document.md)

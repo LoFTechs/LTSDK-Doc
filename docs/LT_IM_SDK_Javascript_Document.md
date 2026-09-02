@@ -1,7 +1,7 @@
 # <a name = "index">LT IM SDK Javascript Document<a>
 -------------------------------------------
 Version: 5.3.100
-Date: 2026/08/04
+Date: 2026/09/02
 
 **Change History**
 
@@ -103,7 +103,9 @@ String/Integer/Boolean/Objcet:
 1. 使用LoFTech提供之「Javascript SDK」時，從網站(yourcompany.com)上若要傳送檔案到LoFTech儲存服務的後台時，因為離開網站會被瀏覽器判斷為Cross domain行為，所以LoFTech儲存服務的後台需要允許來自於網站的相關網域 (即開放CORS)存取。
 如果使用方要在除了網站(yourcompany.com)以外的網站使用此Javascript SDK，那麼使用的這個網域也要先知會LoFTech進行開放，若使用方不特別告知，LoFTech預設會開放 *.yourcompany.com 全部。</br>
 
-	使用方開發者在測試調用的過程中如果遇到瀏覽器console輸出「No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'null' is therefore not allowed access.」錯誤，就表示是CORS問題, 請洽詢LoFTech是否需要額外使用方測試區網域。
+	使用方開發者在測試調用的過程中如果遇到瀏覽器console輸出「No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'null' is therefore not allowed access.」錯誤，就表示是CORS問題, 請洽詢LoFTech是否需要額外使用方測試區網域。 
+	
+	[下載 LTIMSDK Web Javascript](https://github.com/LoFTechs/LTIMSDK-Web-Javascript)
 
 
 2. 將 webimsdk.config.js 與 webimsdk-{version}.min.js 加入頁面
@@ -112,6 +114,8 @@ String/Integer/Boolean/Objcet:
 <script type='text/javascript' src='./webimsdk.config.js'></script>
 <script type='text/javascript' src='./webimsdk-{version}.min.js'></script>
 ```
+
+
 
 [Top](#index)
 ## <a name="use_im">使用說明</a>
