@@ -1,6 +1,9 @@
 # iOS Change Log
 
 ---
+### 5.3.4
+-   [Update] Credential update.
+
 ### 5.3.3
 -   [Update] Credential update.
 -   [Update] Voice Quality Optimization.
