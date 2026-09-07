@@ -1,6 +1,6 @@
 # LT Call SDK Android Document
 
-<sub>Last update time: 2025/12/09</sub>
+<sub>Last update time: 2026/09/07</sub>
 
 ---
 
