@@ -126,11 +126,11 @@ String/Integer/Boolean/Objcet:
 #### webimsdk.config
 
 ```
-var BRAND_ID = brandID;
-var BOSH_SERVICE = boshServiceUrl;
-var IM_SERVER = imServerUrl;
-var STORAGE_DOMAIN = storageDomain;
-var STORAGE_ACCOUNT = storageAccount;
+var BRAND_ID = {{Brand_ID}};
+var IM_SERVER = {{IM-Host}};
+var BOSH_SERVICE = https://{{IM-Host}}/http-bind;
+var STORAGE_DOMAIN = {{STUNE-Host}};
+var STORAGE_ACCOUNT = storage Account;
 ```
 #### 參數說明及必要性
 
